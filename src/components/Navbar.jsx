@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
+import { Pacifico, Quicksand } from '@next/font/google'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -14,9 +15,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const pacifico = Pacifico({
+  weight: '400',
+  subsets: ['latin']
+})
+
+const quick = Quicksand({
+  weight: '500',
+  subsets: ['latin']
+})
+
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-[#AD7BE9]">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -35,17 +46,13 @@ export default function Example() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    className="block w-16 h-auto"
+                    src="https://macharetelucas.com.br/img/empregados.png"
+                    alt="Produtos Clear"
                   />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <span className={`${pacifico.className} text-4xl`}>Clear</span>
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
+                <div className="hidden sm:ml-6 sm:flex items-center">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <a
@@ -53,7 +60,7 @@ export default function Example() {
                         href={item.href}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          ` ${quick.className} px-3 py-2 rounded-md text-sm font-medium`
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
@@ -64,13 +71,7 @@ export default function Example() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+               
 
                 {/* Profile dropdown */}
                 <BotaoLogin />

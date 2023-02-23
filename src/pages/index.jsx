@@ -20,10 +20,38 @@ export default function Home(session) {
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
       </Swiper> */}
-      <div className="container m-auto px-4">
-        <div className="w-full bg-cyan-300 h-screen">
+      <div className="container m-auto px-4 flex">
+        {/* <div className="w-full bg-cyan-300 h-screen">
+
+        </div> */}
+
+        <div className="w-24 bg-[#AF0171] h-20">
 
         </div>
+        <div className="w-24 bg-[#F2C2D4] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#4C0D3B] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#F4A4C3] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#AE0166] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#01AF8E] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#AF7401] h-20 ml-5">
+
+        </div>
+        <div className="w-24 bg-[#0171AF] h-20 ml-5">
+
+        </div>
+
+
+
       </div>
     </>
   )
