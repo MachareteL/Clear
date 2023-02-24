@@ -27,7 +27,7 @@ const quick = Quicksand({
 
 export default function Example() {
   return (
-    <Disclosure as="nav" className="bg-[#AD7BE9]">
+    <Disclosure as="nav" className="bg-[#90e6c5] border-b border-[#e3e9ed]">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -43,14 +43,14 @@ export default function Example() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block w-16 h-auto"
+                    className="block w-16 h-auto logo"
                     src="https://macharetelucas.com.br/img/empregados.png"
                     alt="Produtos Clear"
                   />
-                  <span className={`${pacifico.className} text-4xl`}>Clear</span>
+                  <span className={`${pacifico.className} text-5xl text-[#0f73ee] logo`}>Clear</span>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex items-center">
                   <div className="flex space-x-4">

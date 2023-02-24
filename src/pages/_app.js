@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import NavBar from '@/components/navBar'
 import '@/styles/globals.css'
 import { SessionProvider } from "next-auth/react"
@@ -10,6 +11,7 @@ export default function App({
     <SessionProvider session={session}>
       <NavBar />
       <Component {...pageProps} />
+      <Footer />
     </SessionProvider>
   )
 } 
