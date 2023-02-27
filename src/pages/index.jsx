@@ -3,8 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
 
-
-export default function Home(session) {
+export default function Home() {
   return (
     <>
       {/* <Swiper
@@ -20,13 +19,13 @@ export default function Home(session) {
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
       </Swiper> */}
-      <div className="container m-auto px-4 block">
+      <div className="container m-auto px-4 block min-h-screen">
         {/* <div className="w-full bg-cyan-300 h-screen">
 
         </div> */}
         <div className="w-full flex justify-evenly my-10">
 
-          <div className="w-24 bg-[#AF0171] h-20">
+          <div className="w-24 bg-[#AF0171] h-20 animate-ping hover:animate-none">
 
           </div>
           <div className="w-24 bg-[#F2C2D4] h-20 ml-5">
@@ -48,7 +47,7 @@ export default function Home(session) {
 
           </div>
           <div className="w-24 bg-[#0171AF] h-20 ml-5">
-            
+
           </div>
         </div>
 
@@ -80,8 +79,8 @@ export default function Home(session) {
           <div className="w-24 bg-[#0171AF] h-20 ml-5">
 
           </div>
- 
-          
+
+
         </div>
 
 
@@ -91,9 +90,9 @@ export default function Home(session) {
   )
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  return {
-    props: session
-  }
-}
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context)
+//   return {
+//     props: session
+//   }
+// }

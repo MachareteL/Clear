@@ -2,11 +2,20 @@ import { useSession, signIn, signOut, getSession } from "next-auth/react"
 import { Menu, Transition } from '@headlessui/react'
 
 
+
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 export default function BotaoLogin() {
   const { data: session } = useSession()
+
+  
+
+
+
+
   
   if (session) {
     const foto = (session.user.image).toString()
@@ -70,7 +79,7 @@ export default function BotaoLogin() {
   return (
     <>
     
-    <button onClick={() => signIn()} className="bg-gray-900 text-gray-300 text-sm font-bold px-4 py-2 rounded">Login</button>
+    <button onClick={() => signIn()} className="bg-[#790252] text-white text-sm font-bold px-4 py-2 rounded">Login</button>
 
     </>
   )

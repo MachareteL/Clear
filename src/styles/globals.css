@@ -7,6 +7,6 @@
 }
 
 .logo{
-    text-shadow: 5px 0 #e3e9ed;
+    text-shadow: 5px 0 rgba(192, 192, 231, 0.589);
     user-select: none;
 }
