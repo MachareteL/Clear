@@ -22,7 +22,7 @@ const pacifico = Pacifico({
 })
 
 const quick = Quicksand({
-  weight: '500',
+  weight: '600',
   subsets: ['latin']
 })
 
@@ -62,7 +62,7 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-[#790252] relative after:absolute after:w-full after:h-1 after:left-0 after:bottom-0 after:origin-bottom-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-[#D1FFF3] ',
+                          item.current ? 'bg-gray-900 text-white' : 'text-[#C154C1] relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-[#AF0171]',
                           ` ${quick.className} px-3 py-2 rounded-md text-sm font-medium`
                         )}
                         aria-current={item.current ? 'page' : undefined}

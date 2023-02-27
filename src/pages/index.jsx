@@ -6,7 +6,7 @@ import 'swiper/css';
 export default function Home() {
   return (
     <>
-      {/* <Swiper
+      <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         // spaceBetween={50}
@@ -14,18 +14,19 @@ export default function Home() {
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
         className="h-80">
-        <SwiperSlide className="bg-red-500 h-full">Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-      </Swiper> */}
+        <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
+        <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
+        <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
+        <SwiperSlide className="bg-sky-500 h-full">Slide 3</SwiperSlide>
+        <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide>
+      </Swiper>
       <div className="container m-auto px-4 block min-h-screen">
         {/* <div className="w-full bg-cyan-300 h-screen">
 
         </div> */}
         <div className="w-full flex justify-evenly my-10">
 
-          <div className="w-24 bg-[#AF0171] h-20 animate-ping hover:animate-none">
+          <div className="w-24 bg-[#AF0171] h-20 animate hover:animate-none">
 
           </div>
           <div className="w-24 bg-[#F2C2D4] h-20 ml-5">
