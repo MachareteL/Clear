@@ -5,6 +5,8 @@
 *{
     box-sizing: border-box;
 }
+
+
 body{
     @apply bg-gray-50
 }

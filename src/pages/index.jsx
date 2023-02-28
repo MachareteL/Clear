@@ -3,11 +3,29 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
-
+import { HandThumbUpIcon } from '@heroicons/react/24/solid'
 const quick = Quicksand({
   subsets: ['latin'],
   weight: 'variable'
 })
+
+const exemplo = [
+  {
+    nome: 'produto',
+    preco: 20,
+    desc: 'produto muito bom',
+  },
+  {
+    nome: 'produto',
+    preco: 19,
+    desc: 'produto muito bom',
+  },
+  {
+    nome: 'produto',
+    preco: 30,
+    desc: 'produto muito bom',
+  },
+]
 
 export default function Home() {
   return (
@@ -19,7 +37,7 @@ export default function Home() {
         slidesPerView={1}
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
-        className="h-40 sm:h-80">
+        className="h-40 sm:h-80 -z-10">
         <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
         <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
         <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
@@ -27,8 +45,15 @@ export default function Home() {
         <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide>
       </Swiper>
 
+      <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white md:h-24 my-10 lg:grid-cols-4`}>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><HandThumbUpIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2" /><span className="ml-3"> Pagamento prático e seguro</span></div>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Cartao</span></div>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Pix</span></div>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3 w-full flex"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> <div className="flex flex-col ml-3 items-center justify-center"><span> Pague na Entrega</span><span className="text-xs text-gray-500"> * Pedidos abaixo de R$100</span></div> </span></div>
+      </div>
 
-      <div id="mobile_payment" className="sm:hidden">
+      {/* <div id="category" className="container mx-auto px-4">
+        <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 4500, disableOnInteraction: false }}
@@ -36,24 +61,13 @@ export default function Home() {
           slidesPerView={1}
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
-          className="w-11/12 m-auto bg-red-500 h-24 my-10">
+          className=" bg-red-500 h-24 my-10">
           <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
           <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
           <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
           <SwiperSlide className="bg-sky-500 h-full">Slide 3</SwiperSlide>
         </Swiper>
-      </div>
-
-      <div id="desktop_payments" className="hidden sm:grid container m-auto bg-white h-24 my-10 sm:grid-cols-4">
-        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pagamento prático e seguro</span></div>
-        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Cartao</span></div>
-        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Pix</span></div>
-        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3 w-full flex"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> <div className="flex flex-col ml-3 items-center justify-center"><span> Pague na Entrega</span><span className="text-xs text-gray-400"> *pedidos abaixo de R$100</span></div> </span></div>
-      </div>
-
-      <div id="category" className="container mx-auto">
-        <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Compre por categoria</span>
-      </div>
+      </div> */}
 
 
 

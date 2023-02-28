@@ -1,8 +1,7 @@
-import { Fragment, useEffect } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
-import { Pacifico, Quicksand, WindSong } from '@next/font/google'
+import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 
 const navigation = [
@@ -69,8 +68,8 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-[#C154C1] relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-[#AF0171]',
-                          ` ${quick.className} px-3 py-2 rounded-md text-sm font-medium`
+                          item.current ? 'bg-gray-900 text-white' : 'text-indigo-600 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-indigo-700',
+                          ` ${quick.className} px-3 py-2 rounded-md text-sm font-medium tracking-tight`
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
