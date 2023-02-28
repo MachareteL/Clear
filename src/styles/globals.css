@@ -5,7 +5,9 @@
 *{
     box-sizing: border-box;
 }
-
+body{
+    @apply bg-gray-50
+}
 .logo{
     text-shadow: 5px 0 rgba(192, 192, 231, 0.589);
     user-select: none;

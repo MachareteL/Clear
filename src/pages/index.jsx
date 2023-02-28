@@ -2,6 +2,12 @@ import { getSession } from "next-auth/react"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
+import { Quicksand } from "@next/font/google";
+
+const quick = Quicksand({
+  subsets: ['latin'],
+  weight: 'variable'
+})
 
 export default function Home() {
   return (
@@ -22,7 +28,7 @@ export default function Home() {
       </Swiper>
 
 
-      <div id="pagamentos" className="sm:hidden">
+      <div id="mobile_payment" className="sm:hidden">
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 4500, disableOnInteraction: false }}
@@ -38,16 +44,21 @@ export default function Home() {
         </Swiper>
       </div>
 
-      <div className="hidden sm:grid container m-auto bg-red-500 h-24 my-10 sm:grid-cols-4">
-        <div className="bg-sky-500 m-1"></div>
-        <div className="bg-sky-500 m-1"></div>
-        <div className="bg-sky-500 m-1"></div>
-        <div className="bg-sky-500 m-1"></div>
+      <div id="desktop_payments" className="hidden sm:grid container m-auto bg-white h-24 my-10 sm:grid-cols-4">
+        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pagamento prático e seguro</span></div>
+        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Cartao</span></div>
+        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Pix</span></div>
+        <div className="m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3 w-full flex"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> <div className="flex flex-col ml-3 items-center justify-center"><span> Pague na Entrega</span><span className="text-xs text-gray-400"> *pedidos abaixo de R$100</span></div> </span></div>
       </div>
-      <div className="container m-auto px-4 block min-h-screen">
-        {/* <div className="w-full bg-cyan-300 h-screen">
 
-        </div> */}
+      <div id="category" className="container mx-auto">
+        <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Compre por categoria</span>
+      </div>
+
+
+
+      <div className="container m-auto px-4 block min-h-screen">
+
         <div className="w-full flex justify-evenly my-10">
 
           <div className="w-24 bg-[#AF0171] h-20 animate hover:animate-none">

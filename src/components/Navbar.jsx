@@ -1,8 +1,8 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
-import { Pacifico, Quicksand } from '@next/font/google'
+import { Pacifico, Quicksand, WindSong } from '@next/font/google'
 import { useRouter } from 'next/router'
 
 const navigation = [
@@ -29,8 +29,15 @@ const quick = Quicksand({
 export default function NavBar() {
   const route = useRouter()
 
+  // useEffect(()=>{
+  //   window.addEventListener('scroll',()=>{
+  //     if (window.scrollY >= 100) {
+        // TODO A FUNCTION TO UPDATE THE NAVBAR STYLE -- do it using state/setstate
+  //   }})
+  // })
+
   return (
-    <Disclosure as="nav" className="bg-[#FFF] border-b border-[#e3e9ed]">
+    <Disclosure as="nav" className={classNames("bg-[#FFF] border-b border-[#e3e9ed] shadow-sm")}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -38,7 +45,7 @@ export default function NavBar() {
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
+                  <span className="sr-only">Open main menu</span>z
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
