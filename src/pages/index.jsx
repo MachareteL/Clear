@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
-import { HandThumbUpIcon } from '@heroicons/react/24/solid'
+import { HandThumbUpIcon, TruckIcon, CreditCardIcon } from '@heroicons/react/24/solid'
 const quick = Quicksand({
   subsets: ['latin'],
   weight: 'variable'
@@ -45,10 +45,16 @@ export default function Home() {
         <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide>
       </Swiper>
 
-      <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white md:h-24 my-10 lg:grid-cols-4`}>
-        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><HandThumbUpIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2" /><span className="ml-3"> Pagamento prático e seguro</span></div>
-        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Cartao</span></div>
-        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> Pague com Pix</span></div>
+      <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white lg:h-24 my-10 lg:grid-cols-4`}>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
+          <HandThumbUpIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2" /><span className="ml-3"> Pagamento prático e seguro</span>
+        </div>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
+          <TruckIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2" /><span className="ml-3"> Compre sem sair de casa</span>
+        </div>
+        <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
+          <CreditCardIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2 " /><span className="ml-3"> Pague com Cartao/Pix</span>
+        </div>
         <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-1 before:h-[95%] before:bottom-0 before:absolute relative items-center flex"><span className="ml-3 w-full flex"><img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" /> <div className="flex flex-col ml-3 items-center justify-center"><span> Pague na Entrega</span><span className="text-xs text-gray-500"> * Pedidos abaixo de R$100</span></div> </span></div>
       </div>
 
