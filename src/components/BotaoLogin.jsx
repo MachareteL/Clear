@@ -29,7 +29,7 @@ export default function BotaoLogin() {
                       <img
                         className="h-8 w-8 rounded-full"
                         src={foto}
-                        alt=""
+                        alt="user"
                       />
                     </Menu.Button>
                       

@@ -1,7 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
-import { ShoppingCartIcon } from '@heroicons/react/24/solid'
+import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -43,9 +43,9 @@ export default function NavBar() {
     <Disclosure as="nav" className={classNames("bg-[#FFF] border-b border-[#e3e9ed] shadow-sm")}>
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -56,7 +56,7 @@ export default function NavBar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center cursor-pointer" onClick={()=>route.push('/')}>
                   <img
                     className="block w-16 h-auto logo"
@@ -65,7 +65,7 @@ export default function NavBar() {
                   />
                   <span className={`${pacifico.className} text-5xl text-[#0f73ee] logo`}>Clear</span>
                 </div>
-                <div className="hidden sm:ml-6 sm:flex items-center">
+                <div className="hidden md:ml-6 md:flex items-center">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <a
@@ -83,19 +83,23 @@ export default function NavBar() {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
 
 
                 {/* Profile dropdown */}
-                <BotaoLogin />
-                <button onClick={()=>setOpen(true)}><ShoppingCartIcon className='w-8 h-auto text-[#790252] cursor-pointer hover:text-[#96116b] ml-3'/></button>
+                <button className='hidden md:block' onClick={()=>console.log('e')}><HeartIcon className='w-8 h-auto text-[#790252] cursor-pointer hover:text-[#96116b] ml-3'/></button>
+
+                <button className='hidden md:block' onClick={()=>setOpen(true)}><ShoppingCartIcon className='w-8 h-auto text-[#790252] cursor-pointer hover:text-[#96116b] ml-3'/></button>
                 <Carrinho abrido={aberto} desabrido={()=>setOpen(!aberto)}/>
+
+
+                <BotaoLogin />
                 
               </div>
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
                 <Disclosure.Button
