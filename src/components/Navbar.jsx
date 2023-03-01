@@ -1,9 +1,11 @@
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
-
+import { useState } from 'react'
+import Carrinho from './Carrinho'
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Team', href: '#', current: false },
@@ -27,6 +29,8 @@ const quick = Quicksand({
 
 export default function NavBar() {
   const route = useRouter()
+  const [aberto, setOpen] = useState(false)
+
 
   // useEffect(()=>{
   //   window.addEventListener('scroll',()=>{
@@ -84,6 +88,9 @@ export default function NavBar() {
 
                 {/* Profile dropdown */}
                 <BotaoLogin />
+                <button onClick={()=>setOpen(true)}><ShoppingCartIcon className='w-8 h-auto text-[#790252] cursor-pointer hover:text-[#96116b] ml-3'/></button>
+                <Carrinho abrido={aberto} desabrido={()=>setOpen(!aberto)}/>
+                
               </div>
             </div>
           </div>
