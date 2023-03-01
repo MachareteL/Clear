@@ -3,29 +3,42 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
-import { HandThumbUpIcon, TruckIcon, CreditCardIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
-import Carrinho from "@/components/Carrinho";
-import { useState } from "react";
+import { HandThumbUpIcon, TruckIcon, CreditCardIcon } from '@heroicons/react/24/solid'
+
+
 const quick = Quicksand({
   subsets: ['latin'],
   weight: 'variable'
 })
 
-const exemplo = [
+const callouts = [
   {
-    nome: 'produto',
-    preco: 20,
-    desc: 'produto muito bom',
+    name: 'Sabão',
+    description: 'Work from home accessories',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
+    imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
+    href: '#',
   },
   {
-    nome: 'produto',
-    preco: 19,
-    desc: 'produto muito bom',
+    name: 'Desinfetante',
+    description: 'Journals and note-taking',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
+    imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
+    href: '#',
   },
   {
-    nome: 'produto',
-    preco: 30,
-    desc: 'produto muito bom',
+    name: 'Cloro',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
+    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+    href: '#',
+  },
+  {
+    name: 'Detergente',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
+    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+    href: '#',
   },
 ]
 
@@ -35,12 +48,13 @@ export default function Home() {
     <>
       <Swiper
         modules={[Autoplay]}
+        loop={true}
         autoplay={{ delay: 6500, disableOnInteraction: false }}
         // spaceBetween={50}
         slidesPerView={1}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
-        className="h-40 sm:h-80 -z-10">
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
+        className="h-40 sm:h-72 -z-[1]">
         <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
         <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
         <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
@@ -48,7 +62,7 @@ export default function Home() {
         <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide>
       </Swiper>
 
-      <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white lg:h-24 my-10 lg:grid-cols-4`}>
+      <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white mt-10 lg:grid-cols-4`}>
         <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-[3px] before:rounded-full before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
           <HandThumbUpIcon className="ml-3 h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2" /><span className="ml-3"> Limpeza e praticidade</span>
         </div>
@@ -69,24 +83,47 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div id="category" className="container mx-auto px-4">
-        <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 4500, disableOnInteraction: false }}
-          // spaceBetween={50}
-          slidesPerView={1}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-          className=" bg-red-500 h-24 my-10">
-          <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
-          <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
-          <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
-          <SwiperSlide className="bg-sky-500 h-full">Slide 3</SwiperSlide>
-        </Swiper>
-      </div> */}
+      <div id="_div" className="my-10 w-11/12 m-auto h-px bg-gray-300"></div>
+
+      <div className="w-full">
+        <div id="category" className="container mx-auto">
+          {/* sabao, desinferante, Detergente, Limpa +, Cloro */}
+
+            <div className="bg-gray-100 w-full">
+              <div className="max-w-7xl px-4">
+                <div className="mx-auto max-w-2xl py-8   lg:max-w-none">
+                  <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
+
+                  {/* <h2 className="text-2xl font-bold text-gray-900">Collections</h2> */}
+
+                  <div className="mt-6 space-y-12 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:space-y-0">
+                    {callouts.map((callout) => (
+                      <div key={callout.name} className="group relative">
+                        <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                          <img
+                            src={callout.imageSrc}
+                            alt={callout.imageAlt}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <h3 className="mt-6 text-sm text-gray-500">
+                          <a href={callout.href}>
+                            <span className="absolute inset-0" />
+                            {callout.name}
+                          </a>
+                        </h3>
+                        <p className="text-base font-semibold text-gray-900">{callout.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* div*5.border.border-gray-300.hover:shadow-xl.h-40.w-20.cursor-pointer.transition.ease-out.duration-500 */}
+        </div>
 
 
+      </div>
 
       <div className="container m-auto px-4 block min-h-screen">
 
@@ -137,13 +174,14 @@ export default function Home() {
           <div className="w-24 bg-[#0171AF] h-20 ml-5">
 
           </div>
-          <div className="w-24 bg-[#0f73ee] h-20 ml-5">
+          {/* that nice  */}
+          <div className="w-24 bg-[#0f73ee] h-20 ml-5 outline-dashed">
 
           </div>
-          <div className="w-24 bg-[#0171AF] h-20 ml-5">
+          <div className="w-24 bg-[#00B9C5] h-20 ml-5 outline-dotted">
 
           </div>
-          <div className="w-24 bg-[#0171AF] h-20 ml-5">
+          <div className="w-24 bg-[#14B1F0] h-20 ml-5 outline-double">
 
           </div>
 

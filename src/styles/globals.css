@@ -2,15 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     box-sizing: border-box;
 }
 
 
-body{
-    @apply bg-gray-50
+body {
+    background-color: #F5F5F5;
+    /* @apply bg-gray-50 */
 }
-.logo{
+
+.logo {
     text-shadow: 5px 0 rgba(192, 192, 231, 0.589);
     user-select: none;
+}
+
+.swiper-container {
+    z-index: -1 !important;
+}
+
+.swiper-wrapper {
+    z-index: -1 !important;
+}
+
+.swiper {
+    z-index: -1 !important;
 }
