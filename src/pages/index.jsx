@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
-import { HandThumbUpIcon, TruckIcon, CreditCardIcon } from '@heroicons/react/24/solid'
+import { HandThumbUpIcon, TruckIcon, CreditCardIcon, HomeIcon } from '@heroicons/react/24/solid'
 
 
 const quick = Quicksand({
@@ -74,7 +74,7 @@ export default function Home() {
         </div>
         <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-[3px] before:rounded-full before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
           <span className="ml-3 w-full flex">
-            <img src="https://via.placeholder.com/50/6366f1/FFF" className="inline rounded-full" alt="" />
+          <HomeIcon className="h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2 "/>
             <div className="flex flex-col ml-3 items-center justify-center">
               <span> Pague na Entrega</span>
               <span className="text-xs text-gray-500"> * Pedidos abaixo de R$100</span>
@@ -89,37 +89,37 @@ export default function Home() {
         <div id="category" className="container mx-auto">
           {/* sabao, desinferante, Detergente, Limpa +, Cloro */}
 
-            <div className="bg-gray-100 w-full">
-              <div className="max-w-7xl px-4">
-                <div className="mx-auto max-w-2xl py-8   lg:max-w-none">
-                  <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
+          <div className="bg-gray-100 w-full">
+            <div className="max-w-7xl px-4">
+              <div className="mx-auto max-w-2xl py-8   lg:max-w-none">
+                <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
 
-                  {/* <h2 className="text-2xl font-bold text-gray-900">Collections</h2> */}
+                {/* <h2 className="text-2xl font-bold text-gray-900">Collections</h2> */}
 
-                  <div className="mt-6 space-y-12 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:space-y-0">
-                    {callouts.map((callout) => (
-                      <div key={callout.name} className="group relative">
-                        <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                          <img
-                            src={callout.imageSrc}
-                            alt={callout.imageAlt}
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <h3 className="mt-6 text-sm text-gray-500">
-                          <a href={callout.href}>
-                            <span className="absolute inset-0" />
-                            {callout.name}
-                          </a>
-                        </h3>
-                        <p className="text-base font-semibold text-gray-900">{callout.description}</p>
+                <div className="mt-6 space-y-12 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:space-y-0">
+                  {callouts.map((callout) => (
+                    <div key={callout.name} className="group relative">
+                      <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                        <img
+                          src={callout.imageSrc}
+                          alt={callout.imageAlt}
+                          className="h-full w-full object-cover object-center"
+                        />
                       </div>
-                    ))}
-                  </div>
+                      <h3 className="mt-6 text-sm text-gray-500">
+                        <a href={callout.href}>
+                          <span className="absolute inset-0" />
+                          {callout.name}
+                        </a>
+                      </h3>
+                      <p className="text-base font-semibold text-gray-900">{callout.description}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-            {/* div*5.border.border-gray-300.hover:shadow-xl.h-40.w-20.cursor-pointer.transition.ease-out.duration-500 */}
+          </div>
+          {/* div*5.border.border-gray-300.hover:shadow-xl.h-40.w-20.cursor-pointer.transition.ease-out.duration-500 */}
         </div>
 
 
@@ -141,13 +141,13 @@ export default function Home() {
           <div className="w-24 bg-[#F4A4C3] h-20 ml-5">
 
           </div>
-          <div className="w-24 bg-[#AE0166] h-20 ml-5">
+          <div className="w-24 bg-[#D1FFF3] h-20 ml-5 outline-dotted">
 
           </div>
-          <div className="w-24 bg-[#01AF8E] h-20 ml-5">
+          <div className="w-24 bg-[#BEF0CB] h-20 ml-5 outline-dotted">
 
           </div>
-          <div className="w-24 bg-[#AF7401] h-20 ml-5">
+          <div className="w-24 bg-[#F6F7C1] h-20 ml-5 outline-dotted">
 
           </div>
           <div className="w-24 bg-[#0171AF] h-20 ml-5">
