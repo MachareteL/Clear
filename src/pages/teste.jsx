@@ -1,4 +1,5 @@
 import { Disclosure, Transition } from '@headlessui/react'
+import { useEffect } from 'react'
 
 const Teste = () => {
 
@@ -6,6 +7,15 @@ const Teste = () => {
     const products = [
         {
             id: 1,
+            name: 'Sabao',
+            href: '#',
+            imageSrc: 'https://macharetelucas.com.br/img/cards/img1.png',
+            imageAlt: "Front of men's Basic Tee in black.",
+            price: '$35',
+            color: 'Black',
+        },
+        {
+            id: 2,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -14,7 +24,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
+            id: 3,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -23,7 +33,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
+            id: 4,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -32,7 +42,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
+            id: 5,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -41,7 +51,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
+            id: 6,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -50,7 +60,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
+            id: 7,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -59,16 +69,7 @@ const Teste = () => {
             color: 'Black',
         },
         {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
+            id: 8,
             name: 'Basic Tee',
             href: '#',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
@@ -77,32 +78,28 @@ const Teste = () => {
             color: 'Black',
         },
     ]
+    let listaProdutos = JSON.parse(localStorage.getItem('loja'))
+    function handleKart(produto){
+        listaProdutos.push(produto)
+    }
+
+
+
+    function salvarCarrinho(event){
+        event.preventDefault();
+        localStorage.setItem('loja', JSON.stringify(listaProdutos));
+    }
+
     return (
         <>
-            <Disclosure>
-                <Disclosure.Button>Is team pricing available?</Disclosure.Button>
-
-                <Transition
-                    enter="transition duration-100 ease-out"
-                    enterFrom="transform scale-95 opacity-0"
-                    enterTo="transform scale-100 opacity-100"
-                    leave="transition duration-75 ease-out"
-                    leaveFrom="transform scale-100 opacity-100"
-                    leaveTo="transform scale-95 opacity-0"
-                >
-                    <Disclosure.Panel>
-                        Yes! You can purchase a license that you can share with your entire
-                        team.
-                    </Disclosure.Panel>
-                </Transition>
-            </Disclosure>
+        <button onClick={salvarCarrinho} className='bg-red-500 text-black font-bold px-2 py-4 rounded-md'>Localstorage</button>
             <div className="bg-white w-full">
                 <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900">Nossos produtos</h2>
 
                     <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         {products.map((product) => (
-                            <div key={product.id} className="group relative">
+                            <div key={product.id} className="group relative" onClick={()=>handleKart(product)}>
                                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                                     <img
                                         src={product.imageSrc}

@@ -6,12 +6,8 @@ import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Carrinho from './Carrinho'
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -29,18 +25,19 @@ const quick = Quicksand({
 
 export default function NavBar() {
   const route = useRouter()
+  const navigation = [
+    { name: 'HomePage', href: '#', current: (route.pathname == "/" ? true : false) },
+    { name: 'teste', href: '/teste', current: (route.pathname == "/teste" ? true : false) },
+    { name: 'Projects', href: '#', current: false },
+    { name: 'Calendar', href: '#', current: false },
+  ]
   const [aberto, setOpen] = useState(false)
 
 
-  // useEffect(()=>{
-  //   window.addEventListener('scroll',()=>{
-  //     if (window.scrollY >= 100) {
-  // TODO A FUNCTION TO UPDATE THE NAVBAR STYLE -- do it using state/setstate
-  //   }})
-  // })
+
 
   return (
-    <Disclosure as="nav" className={classNames("bg-[#FFF] border-b border-[#e3e9ed] shadow-sm")}>
+    <Disclosure as="nav" className={classNames("bg-[#fff] border-b border-[#e3e9ed] shadow-sm")}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
@@ -72,7 +69,7 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-indigo-700 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-indigo-700',
+                          item.current ? 'text-indigo-700 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:transition ease-in-out after:duration-300 after:bg-indigo-700' : 'text-indigo-700 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-indigo-700',
                           ` ${quick.className} px-3 py-2 rounded-md text-md font-medium tracking-normal`
                         )}
                         aria-current={item.current ? 'page' : undefined}

@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import React, { Component } from 'react';
 
 const products = [
   {
@@ -26,12 +27,22 @@ const products = [
   },
   // More products...
 ]
+var listaProdutos = []
 
-export default function Carrinho({abrido, desabrido}) {
+class Carrinho extends Component {
+  state = {  } 
+  
+  
+  componentDidMount(){
+    console.log(localStorage.getItem('loja'));
+    if (localStorage.getItem('loja') != null) {
+      listaProdutos = JSON.parse(localStorage.getItem('loja'));
+    }
+  }
 
-  return (
-    <Transition.Root show={abrido} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={desabrido}>
+  render() { 
+    return (<Transition.Root show={this.props.abrido} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={this.props.desabrido}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -65,7 +76,7 @@ export default function Carrinho({abrido, desabrido}) {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={desabrido}
+                            onClick={this.props.desabrido}
                           >
                             <span className="sr-only">Close panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -76,12 +87,12 @@ export default function Carrinho({abrido, desabrido}) {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
+                            {listaProdutos.map((product) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    src='https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg'
+                                    alt={product.name}
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
@@ -94,15 +105,15 @@ export default function Carrinho({abrido, desabrido}) {
                                       </h3>
                                       <p className="ml-4">{product.price}</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                    <p className="mt-1 text-sm text-gray-500">{product.name}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.quantity}</p>
+                                    <p className="text-gray-500">Qty {product.id}</p>
 
                                     <div className="flex">
                                       <button
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-indigo-600 hover:text-indigo-400"
                                       >
                                         Remove
                                       </button>
@@ -136,7 +147,7 @@ export default function Carrinho({abrido, desabrido}) {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={desabrido}
+                            onClick={this.props.desabrido}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
@@ -151,6 +162,32 @@ export default function Carrinho({abrido, desabrido}) {
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
-  )
+    </Transition.Root>);
+  }
 }
+ 
+export default Carrinho;
+
+
+
+// export default function Carrinho() {
+
+
+//     useEffect(() => {
+//         
+//     })
+
+//     // function salvarCarrinho(event){
+//     //     event.preventDefault();
+//     //     localStorage.setItem('loja', JSON.stringify(listaProdutos));
+//     // }
+
+//     // function handleKart(produto) {
+//     //     console.log("adicionando produto: "+ produto.name);
+//     //     listaProdutos.push(produto)
+//     // }
+
+//   return (
+    
+//   )
+// }

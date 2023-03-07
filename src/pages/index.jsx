@@ -4,6 +4,7 @@ import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
 import { HandThumbUpIcon, TruckIcon, CreditCardIcon, HomeIcon } from '@heroicons/react/24/solid'
+import { useEffect } from "react";
 
 
 const quick = Quicksand({
@@ -14,7 +15,7 @@ const quick = Quicksand({
 const callouts = [
   {
     name: 'Sabão',
-    description: 'Work from home accessories',
+    description: 'Lava Roupas',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
     imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
     href: '#',
@@ -43,13 +44,14 @@ const callouts = [
 ]
 
 export default function Home() {
+  
 
   return (
     <>
       <Swiper
         modules={[Autoplay]}
         loop={true}
-        autoplay={{ delay: 6500, disableOnInteraction: false }}
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
         // spaceBetween={50}
         slidesPerView={1}
         // onSlideChange={() => console.log('slide change')}
@@ -74,7 +76,7 @@ export default function Home() {
         </div>
         <div className="mb-2 p-2 m-1 before:bg-indigo-500 before:w-[3px] before:rounded-full before:h-[95%] before:bottom-0 before:absolute relative items-center flex">
           <span className="ml-3 w-full flex">
-          <HomeIcon className="h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2 "/>
+            <HomeIcon className="h-12 w-auto text-white bg-indigo-500 inline rounded-full p-2 " />
             <div className="flex flex-col ml-3 items-center justify-center">
               <span> Pague na Entrega</span>
               <span className="text-xs text-gray-500"> * Pedidos abaixo de R$100</span>
