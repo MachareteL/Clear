@@ -30,14 +30,31 @@ const products = [
 var listaProdutos = []
 
 class Carrinho extends Component {
-  state = {  } 
+  state = { stateProdutos: [] } 
   
-  
+
+  handleDelete(id) {
+    for (let index = 0; index < listaProdutos.length; index++) {
+      if (listaProdutos[index].id == id) {
+        listaProdutos.splice(index, 1)
+      }
+    }      
+    localStorage.setItem('loja', JSON.stringify(listaProdutos));
+    this.setState({stateProdutos: listaProdutos})
+  }
+
   componentDidMount(){
+
     console.log(localStorage.getItem('loja'));
     if (localStorage.getItem('loja') != null) {
       listaProdutos = JSON.parse(localStorage.getItem('loja'));
+      this.setState({stateProdutos: listaProdutos})
+      if(localStorage.getItem('loja') == ""){
+        localStorage.removeItem('loja')
     }
+    }
+    console.log(this.state.stateProdutos);
+
   }
 
   render() { 
@@ -87,7 +104,7 @@ class Carrinho extends Component {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {listaProdutos.map((product) => (
+                            {this.state.stateProdutos.map((product) => (
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -112,7 +129,7 @@ class Carrinho extends Component {
 
                                     <div className="flex">
                                       <button
-                                        type="button"
+                                        onClick={()=>this.handleDelete(product.id)}
                                         className="font-medium text-indigo-600 hover:text-indigo-400"
                                       >
                                         Remove
