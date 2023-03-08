@@ -3,73 +3,50 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import React, { Component } from 'react';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-]
 var listaProdutos = []
 
 class Carrinho extends Component {
   state = { stateProdutos: [] } 
   
-  montarCarrinho(){
-    console.log(localStorage.getItem('loja'));
-    if (localStorage.getItem('loja') != null) {
+  getCarrinho(){
       listaProdutos = JSON.parse(localStorage.getItem('loja'));
       this.setState({stateProdutos: listaProdutos})
-      if(localStorage.getItem('loja') == ""){
-        localStorage.removeItem('loja')
-    }
-    }
-    console.log(this.state.stateProdutos);
   }
 
   componentDidMount(){
-    console.log("carregando pagina");
-    this.montarCarrinho()
+    console.log(this.state);
+    this.getCarrinho()
   }
-  
+
 
   handleAdd(produto){
     listaProdutos.push(produto)
     this.setState({stateProdutos: listaProdutos})
-    console.log(`Recebido produto ${produto.name} e adicionado ao carrinho, localstorage e state`);
+    Swal.fire(
+      'Sucesso!',
+      `${produto.nome} adicionado ao Carrinho!`,
+      'success'
+    )
     localStorage.setItem('loja', JSON.stringify(listaProdutos));
   }
 
   handleDelete(id) {
-    for (let index = 0; index < listaProdutos.length; index++) {
-      if (listaProdutos[index].id == id) {
-        listaProdutos.splice(index, 1)
-      }
-    }      
-    localStorage.setItem('loja', JSON.stringify(listaProdutos));
-    this.setState({stateProdutos: listaProdutos})
+    console.log(id);
+    // for (let index = 0; index < listaProdutos.length; index++) {
+    //   if (listaProdutos[index].id == id) {
+    //     listaProdutos.splice(index, 1)
+    //   }
+    // }      
+    // localStorage.setItem('loja', JSON.stringify(listaProdutos));
+    // this.setState({stateProdutos: listaProdutos})
   }
   
   
   render() { 
-    return (<Transition.Root show={this.props.abrido} as={Fragment}>
+    return (
+    <Transition.Root show={this.props.abrido} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={this.props.desabrido}>
         <Transition.Child
           as={Fragment}
@@ -197,27 +174,3 @@ class Carrinho extends Component {
 }
  
 export default Carrinho;
-
-
-
-// export default function Carrinho() {
-
-
-//     useEffect(() => {
-//         
-//     })
-
-//     // function salvarCarrinho(event){
-//     //     event.preventDefault();
-//     //     localStorage.setItem('loja', JSON.stringify(listaProdutos));
-//     // }
-
-//     // function handleKart(produto) {
-//     //     console.log("adicionando produto: "+ produto.name);
-//     //     listaProdutos.push(produto)
-//     // }
-
-//   return (
-    
-//   )
-// }
