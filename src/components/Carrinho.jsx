@@ -25,13 +25,36 @@ const products = [
     imageAlt:
       'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
   },
-  // More products...
 ]
 var listaProdutos = []
 
 class Carrinho extends Component {
   state = { stateProdutos: [] } 
   
+  montarCarrinho(){
+    console.log(localStorage.getItem('loja'));
+    if (localStorage.getItem('loja') != null) {
+      listaProdutos = JSON.parse(localStorage.getItem('loja'));
+      this.setState({stateProdutos: listaProdutos})
+      if(localStorage.getItem('loja') == ""){
+        localStorage.removeItem('loja')
+    }
+    }
+    console.log(this.state.stateProdutos);
+  }
+
+  componentDidMount(){
+    console.log("carregando pagina");
+    this.montarCarrinho()
+  }
+  
+
+  handleAdd(produto){
+    listaProdutos.push(produto)
+    this.setState({stateProdutos: listaProdutos})
+    console.log(`Recebido produto ${produto.name} e adicionado ao carrinho, localstorage e state`);
+    localStorage.setItem('loja', JSON.stringify(listaProdutos));
+  }
 
   handleDelete(id) {
     for (let index = 0; index < listaProdutos.length; index++) {
@@ -42,21 +65,8 @@ class Carrinho extends Component {
     localStorage.setItem('loja', JSON.stringify(listaProdutos));
     this.setState({stateProdutos: listaProdutos})
   }
-
-  componentDidMount(){
-
-    console.log(localStorage.getItem('loja'));
-    if (localStorage.getItem('loja') != null) {
-      listaProdutos = JSON.parse(localStorage.getItem('loja'));
-      this.setState({stateProdutos: listaProdutos})
-      if(localStorage.getItem('loja') == ""){
-        localStorage.removeItem('loja')
-    }
-    }
-    console.log(this.state.stateProdutos);
-
-  }
-
+  
+  
   render() { 
     return (<Transition.Root show={this.props.abrido} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={this.props.desabrido}>

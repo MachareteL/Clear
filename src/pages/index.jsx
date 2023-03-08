@@ -4,7 +4,6 @@ import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
 import { HandThumbUpIcon, TruckIcon, CreditCardIcon, HomeIcon } from '@heroicons/react/24/solid'
-import { useEffect } from "react";
 
 
 const quick = Quicksand({
