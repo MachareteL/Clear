@@ -6,7 +6,7 @@ import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Carrinho from './Carrinho'
-
+import Link from 'next/link'
 
 
 function classNames(...classes) {
@@ -26,8 +26,8 @@ const quick = Quicksand({
 export default function NavBar() {
   const route = useRouter()
   const navigation = [
-    { name: 'HomePage', href: '#', current: (route.pathname == "/" ? true : false) },
-    { name: 'teste', href: '/teste', current: (route.pathname == "/teste" ? true : false) },
+    { name: 'HomePage', href: '/', current: (route.pathname == "/" ? true : false) },
+    { name: 'Produtos', href: '/produtos', current: (route.pathname == "/produtos" ? true : false) },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
   ]
@@ -65,7 +65,7 @@ export default function NavBar() {
                 <div className="hidden md:ml-6 md:flex items-center">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -75,7 +75,7 @@ export default function NavBar() {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>

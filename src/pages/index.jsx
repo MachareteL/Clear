@@ -44,7 +44,6 @@ const callouts = [
 
 export default function Home() {
   
-
   return (
     <>
       <Swiper

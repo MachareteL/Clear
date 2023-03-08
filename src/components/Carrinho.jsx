@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import React, { Component } from 'react';
+import Link from 'next/link';
 
 const products = [
   {
@@ -170,13 +171,15 @@ class Carrinho extends Component {
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          or
+                          or {' '}
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                             onClick={this.props.desabrido}
                           >
+                            <Link href="/produtos">
                             Continue Shopping
+                            </Link>
                             <span aria-hidden="true"> &rarr;</span>
                           </button>
                         </p>

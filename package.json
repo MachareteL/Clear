@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.0.15",
     "@next/font": "13.1.6",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "mongodb": "^5.1.0",
     "next": "13.1.6",
     "next-auth": "^4.19.2",
     "react": "18.2.0",
