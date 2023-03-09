@@ -32,7 +32,7 @@ export default function NavBar() {
     { name: 'Calendar', href: '#', current: false },
   ]
   const [aberto, setOpen] = useState(false)
-
+  
 
 
 
