@@ -2,9 +2,8 @@ import Footer from '@/components/Footer'
 import NavBar from '@/components/navBar'
 import '@/styles/globals.css'
 import { SessionProvider } from "next-auth/react"
-import { createContext } from 'react'
+import { CarrinhoProvider } from './context/Context'
 
-export const CarrinhoContext = createContext()
 
 export default function App({
   Component,
@@ -12,13 +11,13 @@ export default function App({
 }) {
 
   return (
-    <CarrinhoContext.Provider value='Lucas'>
+    <CarrinhoProvider>
       <SessionProvider session={session}>
         <NavBar />
         <Component {...pageProps} />
         <Footer />
       </SessionProvider>
-    </CarrinhoContext.Provider>
+    </CarrinhoProvider>
   )
 }
 

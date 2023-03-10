@@ -1,41 +1,42 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
-
-var listaProdutos = []
-
+import { CarrinhoContext } from '@/pages/context/Context';
 
 
-export default function Carrinho() {
-  const [stateProdutos, setStateProdutos] = useState();
 
 
-  useEffect(() => {
-    if (localStorage.getItem('loja')) {
-      listaProdutos = JSON.parse(localStorage.getItem('loja'));
-      setStateProdutos(listaProdutos)
-    } else {
-      setStateProdutos([])
+export default function Carrinho({abrido, desabrido}) {
+  
+  const [stateProdutos, setStateProdutos] = useState([]);
 
-    }
-  })
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem('loja');
+  //   if ( data !== null ) setStateProdutos(JSON.parse(data));
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem('loja', JSON.stringify(stateProdutos));
+  // }, [stateProdutos]);
+  
 
   const handleAdd = (produto) => {
-    console.log(stateProdutos);
-    if (stateProdutos.includes(produto)) {
-      return Swal.fire("item já está no carrinho")
-    }
-    listaProdutos.push(produto)
-    setStateProdutos(listaProdutos)
-    localStorage.setItem('loja', JSON.stringify(listaProdutos));
-    Swal.fire(
-      'Sucesso!',
-      `${produto.nome} adicionado ao Carrinho!`,
-      'success'
-    )
+    
+    // console.log(stateProdutos);
+    // if (stateProdutos.includes(produto)) {
+    //   return Swal.fire("item já está no carrinho")
+    // }
+    // listaProdutos.push(produto)
+    // setStateProdutos(listaProdutos)
+    // localStorage.setItem('loja', JSON.stringify(listaProdutos));
+    // Swal.fire(
+    //   'Sucesso!',
+    //   `${produto.nome} adicionado ao Carrinho!`,
+    //   'success'
+    // )
 
   }
 
@@ -51,8 +52,8 @@ export default function Carrinho() {
   }
 
   return (
-    <Transition.Root show={this.props.abrido} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={this.props.desabrido}>
+    <Transition.Root show={abrido} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={desabrido}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -86,7 +87,7 @@ export default function Carrinho() {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={this.props.desabrido}
+                            onClick={desabrido}
                           >
                             <span className="sr-only">Close panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -97,7 +98,7 @@ export default function Carrinho() {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {this.state.stateProdutos.length > 0 ? this.state.stateProdutos.map((product) => (
+                            {stateProdutos.length > 0 ? stateProdutos.map((product) => (
                               <li key={product._id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -157,7 +158,6 @@ export default function Carrinho() {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={this.props.desabrido}
                           >
                             <Link href="/produtos">
                               Continue Shopping
