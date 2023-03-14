@@ -1,10 +1,6 @@
-'use client';
-'use client side';
-
-import useLocalStorage from "@/hooks/useLocalStorage";
 import { Quicksand } from "@next/font/google";
-import { useContext, useEffect, useState } from "react";
-import { CarrinhoContext } from "./context/Context";
+import { useContext, useState } from "react";
+import { AddCartContext } from "@/context/Context";
 
 const quick = Quicksand({
     weight: 'variable',
@@ -13,24 +9,33 @@ const quick = Quicksand({
 
 
 
-export default function Produtos({ products }) {
-    // const context = useContext(CarrinhoContext)
-    // let produtos = []
+export default function Produtos() {
 
-    // useEffect(() => {
-    //     produtos = context[0]()
-    // })
+    const addItems = useContext(AddCartContext);
 
-    // const handleAdd = (produto) => {
-    //     produtos.push(produto)
-    //     context[1](produtos)
-    // }
+    const products = [
+        {
+            _id: 1,
+            imgSrc: '',
+            name: "Product One",
+            price: 20
+        },
+        {
+            _id: 2,
+            name: "Product Two",
+            price: 56
+        },
+        {
+            _id: 3,
+            name: "Product Three",
+            price: 13
+        }
+    ];
 
-
-    const [carrinho, setCarrinho] = useLocalStorage("carrinho",[])
+    const [carrinho, setCarrinho] = useState([])
 
     const handleAdd = (produto) => {
-        setCarrinho([...carrinho, produto]);
+        addItems(produto)
     }
     return (
         <>
@@ -38,7 +43,7 @@ export default function Produtos({ products }) {
                 <h2 className={`${quick.className} text-2xl font-bold tracking-tight text-gray-900`}>Nossos produtos</h2>
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
-                        <div key={product.id} className="group relative" onClick={() => handleAdd(product)}>
+                        <div key={product._id} className="group relative" onClick={event => handleAdd(product)}>
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
                                     src={product.imageSrc}
@@ -65,12 +70,12 @@ export default function Produtos({ products }) {
         </>);
 }
 
-export async function getServerSideProps() {
-    const batida = await fetch('http://localhost:3000/api/produtos');
-    const products = await batida.json();
+// export async function getServerSideProps() {
+//     const batida = await fetch('http://localhost:3000/api/produtos');
+//     const products = await batida.json();
 
-    return {
-        props: { products }
-    }
-}
+//     return {
+//         props: { products }
+//     }
+// }
 
