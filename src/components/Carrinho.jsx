@@ -23,6 +23,7 @@ export default function Carrinho({ abrido, desabrido }) {
   };
 
   const addItems = useContext(AddCartContext);
+  
   useEffect(() => {
     let prev_items = JSON.parse(localStorage.getItem('cart')) || [];
     addItems(prev_items)
@@ -105,7 +106,7 @@ export default function Carrinho({ abrido, desabrido }) {
                                     <p className="mt-1 text-sm text-gray-500">{product.nome}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product._id}</p>
+                                    <p className="text-gray-500">Qty {product.qtd}</p>
 
                                     <div className="flex">
                                       <button

@@ -1,6 +1,6 @@
 import { Quicksand } from "@next/font/google";
 import { useCallback, useContext, useState } from "react";
-import { AddCartContext } from "@/context/Context";
+import { AddCartContext, CartContext, RemoveCartContext } from "@/context/Context";
 
 const quick = Quicksand({
     weight: 'variable',
@@ -10,9 +10,9 @@ const quick = Quicksand({
 
 
 export default function Produtos({products}) {
-
+    const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
-
+    const removeProduto = useContext(RemoveCartContext)
     // const products = [
     //     {
     //         _id: 1,
@@ -36,8 +36,17 @@ export default function Produtos({products}) {
     const [carrinho, setCarrinho] = useState([])
 
     const handleAdd = (produto) => {
-        console.log(produto);
-        addItems(produto)
+        if (produtos.length == 0) {
+            addItems(produto)
+        }
+        produtos.map( async (produtinho)=>{
+            if(produto._id == produtinho._id){
+                await removeProduto(produtinho)
+
+                produto = {...produto, qtd: produtinho.qtd+1}
+                addItems(produto)
+            }
+        })
     }
     return (
         <>
@@ -45,8 +54,7 @@ export default function Produtos({products}) {
                 <h2 className={`${quick.className} text-2xl font-bold tracking-tight text-gray-900`}>Nossos produtos</h2>
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
-                        <div key={product._id} className="group relative" onClick={event => handleAdd(useCallback(()=>))
-                        })}>
+                        <div key={product._id} className="group relative" onClick={event => handleAdd({...product, qtd:1})}>
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
                                     src={product.imageSrc}
