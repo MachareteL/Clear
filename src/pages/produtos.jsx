@@ -1,8 +1,10 @@
-import Carrinho from "@/components/Carrinho";
-import { Quicksand } from "@next/font/google";
-import { useContext } from "react";
-import { CarrinhoContext } from "./context/Context";
+'use client';
+'use client side';
 
+import useLocalStorage from "@/hooks/useLocalStorage";
+import { Quicksand } from "@next/font/google";
+import { useContext, useEffect, useState } from "react";
+import { CarrinhoContext } from "./context/Context";
 
 const quick = Quicksand({
     weight: 'variable',
@@ -11,20 +13,33 @@ const quick = Quicksand({
 
 
 
-export default function Produtos({products}){
-    const context = useContext(CarrinhoContext)
-    function logar() {
-        console.log(context[1]("{teste: 'teste'}"));
+export default function Produtos({ products }) {
+    // const context = useContext(CarrinhoContext)
+    // let produtos = []
+
+    // useEffect(() => {
+    //     produtos = context[0]()
+    // })
+
+    // const handleAdd = (produto) => {
+    //     produtos.push(produto)
+    //     context[1](produtos)
+    // }
+
+
+    const [carrinho, setCarrinho] = useLocalStorage("carrinho",[])
+
+    const handleAdd = (produto) => {
+        setCarrinho([...carrinho, produto]);
     }
     return (
         <>
-        <button onClick={logar}>Logar</button>
             <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 className={`${quick.className} text-2xl font-bold tracking-tight text-gray-900`}>Nossos produtos</h2>
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
-                        <div key={product.id} className="group relative" onClick={() => objCart.handleAdd(product)}>
-                            <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                        <div key={product.id} className="group relative" onClick={() => handleAdd(product)}>
+                            <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
                                     src={product.imageSrc}
                                     alt={product.imageAlt}
@@ -35,7 +50,7 @@ export default function Produtos({products}){
                                 <div>
                                     <h3 className="text-sm text-gray-700">
                                         <a>
-                                            <span aria-hidden="true" className="absolute inset-0" />
+                                            <span aria-hidden="true" className="absolute inset-0 cursor-pointer" />
                                             {product.nome}
                                         </a>
                                     </h3>
@@ -53,7 +68,7 @@ export default function Produtos({products}){
 export async function getServerSideProps() {
     const batida = await fetch('http://localhost:3000/api/produtos');
     const products = await batida.json();
-    
+
     return {
         props: { products }
     }
