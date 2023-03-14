@@ -19,7 +19,7 @@ export default function Carrinho({ abrido, desabrido }) {
 
 
   const total = () => {
-    setCartTotal(items.reduce((acc, item) => acc + item.price, 0));
+    setCartTotal(items.reduce((acc, item) => acc + item.preco, 0));
   };
 
   const addItems = useContext(AddCartContext);
@@ -109,7 +109,7 @@ export default function Carrinho({ abrido, desabrido }) {
 
                                     <div className="flex">
                                       <button
-                                        onClick={() => handleDelete(product._id)}
+                                        onClick={() => removeItem(product)}
                                         className="font-medium text-indigo-600 hover:text-indigo-400"
                                       >
                                         Remove
@@ -127,7 +127,7 @@ export default function Carrinho({ abrido, desabrido }) {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>R${cartTotal}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
