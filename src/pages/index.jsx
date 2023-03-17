@@ -4,7 +4,7 @@ import { Autoplay } from "swiper";
 import 'swiper/css';
 import { Quicksand } from "@next/font/google";
 import { HandThumbUpIcon, TruckIcon, CreditCardIcon, HomeIcon } from '@heroicons/react/24/solid'
-
+import { useSession } from "next-auth/react";
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -43,9 +43,13 @@ const callouts = [
 ]
 
 export default function Home() {
-  
+  const sessao = useSession()
+  async function pegarSessao() {
+    await fetch('http://localhost:3000/api/firebase/register')
+  }
   return (
     <>
+    <button onClick={pegarSessao}>Pegar sessao</button>
       <Swiper
         modules={[Autoplay]}
         loop={true}

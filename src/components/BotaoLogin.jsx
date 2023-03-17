@@ -10,15 +10,19 @@ function classNames(...classes) {
 }
 export default function BotaoLogin() {
   const { data: session } = useSession()
-
   
+  async function handleSubmit() {
+    const res = await signIn()
+    console.log("entrou no handlesubmite");
+    console.log(res);
+  }
 
 
 
 
   
   if (session) {
-    const foto = (session.user.image).toString()
+    const foto = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevelopers.elementor.com%2Fdocs%2Fhooks%2Fplaceholder-image%2F&psig=AOvVaw01dMw8eigiWorOheOQxwWM&ust=1679078073313000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPig_NuL4f0CFQAAAAAdAAAAABAE'
     return (
       <>
         <Menu as="div" className="relative ml-3">
@@ -79,7 +83,7 @@ export default function BotaoLogin() {
   return (
     <>
     
-    <button onClick={() => signIn()} className="bg-[#790252] text-white text-sm font-bold px-4 py-2 rounded">Login</button>
+    <button onClick={() => handleSubmit()} className="bg-[#790252] text-white text-sm font-bold px-4 py-2 rounded">Login</button>
 
     </>
   )

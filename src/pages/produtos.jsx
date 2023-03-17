@@ -9,43 +9,45 @@ const quick = Quicksand({
 
 
 
-export default function Produtos({products}) {
+export default function Produtos() {
     const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
     const removeProduto = useContext(RemoveCartContext)
-    // const products = [
-    //     {
-    //         _id: 1,
-    //         imgSrc: 'teste',
-    //         imgAlt: 'teste',
-    //         name: "Product One",
-    //         price: 20
-    //     },
-    //     {
-    //         _id: 2,
-    //         name: "Product Two",
-    //         price: 56
-    //     },
-    //     {
-    //         _id: 3,
-    //         name: "Product Three",
-    //         price: 13
-    //     }
-    // ];
+    const products = [
+        {
+            _id: 1,
+            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
+            imageAlt: 'teste',
+            nome: "Product One",
+            preco: 20
+        },
+        {
+            _id: 2,
+            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
+            imageAlt: 'teste',
+            nome: "Product Two",
+            preco: 30
+        },
+        {
+            _id: 3,
+            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
+            imageAlt: 'teste',
+            nome: "Product Three",
+            preco: 33
+        },
+    ];
 
     const [carrinho, setCarrinho] = useState([])
 
     const handleAdd = (produto) => {
-        if (produtos.length == 0) {
-            addItems(produto)
-        }
-        produtos.map( async (produtinho)=>{
-            if(produto._id == produtinho._id){
+        addItems(produto)
+        produtos.map(async (produtinho) => {
+            if (produto._id == produtinho._id) {
                 await removeProduto(produtinho)
-
-                produto = {...produto, qtd: produtinho.qtd+1}
+                produto = { ...produto, qtd: produtinho.qtd + 1 }
                 addItems(produto)
             }
+
         })
     }
     return (
@@ -54,7 +56,7 @@ export default function Produtos({products}) {
                 <h2 className={`${quick.className} text-2xl font-bold tracking-tight text-gray-900`}>Nossos produtos</h2>
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
-                        <div key={product._id} className="group relative" onClick={event => handleAdd({...product, qtd:1})}>
+                        <div key={product._id} className="group relative" onClick={event => handleAdd({ ...product, qtd: 1 })}>
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
                                     src={product.imageSrc}
@@ -80,13 +82,3 @@ export default function Produtos({products}) {
             </div>
         </>);
 }
-
-export async function getServerSideProps() {
-    const batida = await fetch('http://localhost:3000/api/produtos');
-    const products = await batida.json();
-
-    return {
-        props: { products }
-    }
-}
-

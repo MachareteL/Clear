@@ -1,51 +1,37 @@
-// const inputFile = document.querySelector("#picture__input");
-// const pictureImage = document.querySelector(".picture__image");
-// const pictureImageTxt = "Choose an image";
-// pictureImage.innerHTML = pictureImageTxt;
+import { Storage } from '../../lib/firebaseConfig'
 import { useState } from "react";
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
-// inputFile.addEventListener("change", function (e) {
-//   const inputTarget = e.target;
-//   const file = inputTarget.files[0];
-
-//   if (file) {
-//     const reader = new FileReader();
-
-//     reader.addEventListener("load", function (e) {
-//       const readerTarget = e.target;
-
-//       const img = document.createElement("img");
-//       img.src = readerTarget.result;
-//       img.classList.add("picture__img");
-
-//       pictureImage.innerHTML = "";
-//       pictureImage.appendChild(img);
-//     });
-
-//     reader.readAsDataURL(file);
-//   } else {
-//     pictureImage.innerHTML = pictureImageTxt;
-//   }
-// });
-
-
-
-
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 export default function CriarProduto() {
+    const [carregamento, setCarregamento] = useState(0);
+    const [URL, setURL] = useState("");
+
+    function handleInput(e) {
+        e.preventDefault()
+        console.log("Entrou no input");
+
+        const file = e.target.files[0];
+        if (!file) return;
+        const storageREF = ref(Storage, `images/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageREF, file);
+
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setCarregamento(progress)
+            },
+            error =>{
+                alert(error)
+            },
+            () =>{
+                getDownloadURL(uploadTask.snapshot.ref).then(url=>{
+                    setURL(url);
+                })
+            }
+        )
+    }
+
     return (
         <div className="container m-auto">
             <div>
@@ -115,18 +101,20 @@ export default function CriarProduto() {
                                                         className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                                                     >
                                                         <span>Upload a file</span>
-                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" onInput={(e) => { handleInput(e) }} />
                                                     </label>
                                                     <p className="pl-1">or drag and drop</p>
                                                 </div>
                                                 <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
+                                                    {!URL && <progress value={carregamento} max={100}/>}
+                                                    {URL && <img src={URL} alt="Imagem"/>}
                                     </div>
                                     <div>
                                         <div className="grid">
                                             <label htmlFor="preco" className="block text-sm font-medium leading-6 text-gray-900">Preço</label>
-                                            <input type="number" name="preco" id="preco" className="block w-full px-4 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "/>
+                                            <input type="number" name="preco" id="preco" className="block w-full px-4 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 " />
                                         </div>
                                     </div>
                                 </div>
