@@ -30,7 +30,7 @@ export const authOptions = {
       credentials: {
         email: { label: "Username", type: "text", placeholder: "jsmith", value:'lucas@gmail.com' },
         password: { label: "Password", type: "password" },
-        cpf: { label: "cpf", type: "text", placeholder: "XXX.XXX.XXX-XX"}
+        cpf: { label: "cpf", type: "text", placeholder: "XXX.XXX.XXX-XX"},
       },
       async authorize(credentials, req) {
         // You need to provide your own logic here that takes the credentials

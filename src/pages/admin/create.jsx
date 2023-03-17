@@ -6,6 +6,27 @@ export default function CriarProduto() {
     const [carregamento, setCarregamento] = useState(0);
     const [URL, setURL] = useState("");
 
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = {
+            nome: event.target.nome.value,
+            descricao: event.target.descricao.value,
+            preco: event.target.preco.value,
+            categoria: event.target.categoria.value,
+            imagem: URL
+        }
+        console.log(data);
+        const batida = await fetch('http://localhost:3000/api/produtos/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const response = await batida.json()
+        console.log(response);
+    }
+
     function handleInput(e) {
         e.preventDefault()
         console.log("Entrou no input");
@@ -21,11 +42,11 @@ export default function CriarProduto() {
                 const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 setCarregamento(progress)
             },
-            error =>{
+            error => {
                 alert(error)
             },
-            () =>{
-                getDownloadURL(uploadTask.snapshot.ref).then(url=>{
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then(url => {
                     setURL(url);
                 })
             }
@@ -40,11 +61,12 @@ export default function CriarProduto() {
                         <h3 className="px-4 sm:px-0 mt-5 text-base font-semibold leading-6 text-gray-900">Registrar um novo produto</h3>
                     </div>
                     <div className="mt-5 md:col-span-2 md:mt-0">
-                        <form action="#" method="POST">
+                        <form onSubmit={handleSubmit}>
                             <div className="shadow sm:overflow-hidden sm:rounded-md">
                                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                                    <div className="grid grid-cols-3 gap-6">
-                                        <div className="col-span-3 sm:col-span-2">
+                                    {/* Campo nome e categoria*/}
+                                    <div className="grid grid-cols-6 gap-6">
+                                        <div className="col-span-3 ">
                                             <label htmlFor="nome" className="block text-sm font-medium leading-6 text-gray-900">
                                                 Nome do Produto
                                             </label>
@@ -54,11 +76,25 @@ export default function CriarProduto() {
                                                     name="nome"
                                                     id="nome"
                                                     className="block w-full px-4 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    placeholder="Desinfetante"
+                                                    placeholder="Detergente Clear"
                                                 />
                                             </div>
                                         </div>
+                                        <div className="col-span-3">
+                                            <label htmlFor="categoria" className="block text-sm font-medium leading-6 text-gray-900">
+                                                Categoria do Produto
+                                            </label>
+                                            <div className="mt-2 flex rounded-md shadow-sm">
+                                                <select defaultValue={""} required name="categoria" id="categoria" className="block w-full px-4 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                                    <option value="" disabled>Selecione uma categoria</option>
+                                                    <option value="desinfetante">Desinfetante</option>
+                                                    <option value="sabao">Sabão</option>
+                                                    <option value="detergente">Detergente</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
+
 
                                     <div>
                                         <label htmlFor="descricao" className="block text-sm font-medium leading-6 text-gray-900">
@@ -108,8 +144,8 @@ export default function CriarProduto() {
                                                 <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                                    {!URL && <progress value={carregamento} max={100}/>}
-                                                    {URL && <img src={URL} alt="Imagem"/>}
+                                        {!URL && <progress value={carregamento} max={100} />}
+                                        {URL && <img src={URL} alt="Imagem" />}
                                     </div>
                                     <div>
                                         <div className="grid">

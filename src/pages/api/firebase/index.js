@@ -5,20 +5,19 @@ import { getFirestore } from "firebase-admin/firestore";
 export default function handler(req, res) {
     console.log(req.body);
     const auth = getAuth(app);
-    const email = req.body.email;
-    const password = req.body.password;
-    const cpf = req.body.cpf;
+    const body = req.body;
+
     signInWithEmailAndPassword(auth, email, password)
         .then( async (userCredential) => {
             console.log("entrou no deu certo");
             const db = getFirestore();
-            const docRef = db.collection('users').doc();
+            const docRef = db.collection('users').doc(userCredential.user.reloadUserInfo.localId);
 
             await docRef.set({
                 uid: userCredential.user.reloadUserInfo.localId,
-                email: email,
+                email: body.email,
                 image: '',
-                cpf: cpf
+                cpf: body.cpf,
             });
             const user = userCredential.user;
             res.status(200).json({ user });
