@@ -6,6 +6,11 @@ import { Quicksand } from "@next/font/google";
 import { HandThumbUpIcon, TruckIcon, CreditCardIcon, HomeIcon } from '@heroicons/react/24/solid'
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
+
+import carousel1 from '../../public/images/Carousel_01.png'
+import carousel2 from '../../public/images/Carousel_02.gif'
+import carousel3 from '../../public/images/Carousel_03.png'
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -66,11 +71,15 @@ export default function Home() {
         // onSlideChange={() => console.log('slide change')}
         // onSwiper={(swiper) => console.log(swiper)}
         className="h-40 sm:h-72 -z-[1]">
-        <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
+          <SwiperSlide className="h-full bg-[url('../../public/images/Carousel_01.png')] bg-no-repeat bg-cover"></SwiperSlide>
+          <SwiperSlide className="h-full bg-[url('../../public/images/Carousel_02.gif')] bg-no-repeat bg-cover"></SwiperSlide>
+          <SwiperSlide className="h-full bg-[url('../../public/images/Carousel_03.png')] bg-no-repeat bg-cover"></SwiperSlide>
+  
+        {/* <SwiperSlide className="bg-red-500 h-full bg-[url('https://via.placeholder.com/1280x720/FFC467')] bg-center"></SwiperSlide>
         <SwiperSlide className="bg-red-500 h-full bg-[url('https://macharetelucas.com.br/img/slide3.png')] bg-contain bg-center"></SwiperSlide>
         <SwiperSlide className="bg-teal-500 h-full">Slide 2</SwiperSlide>
         <SwiperSlide className="bg-sky-500 h-full">Slide 3</SwiperSlide>
-        <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide>
+        <SwiperSlide className="bg-indigo-500 h-full">Slide 4</SwiperSlide> */}
       </Swiper>
 
       <div id="_payments" className={`${quick.className} py-2 h-fit md:grid md:grid-cols-2 container m-auto bg-white mt-10 lg:grid-cols-4`}>

@@ -1,15 +1,17 @@
 import { Storage } from '../../lib/firebaseConfig'
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import Image from 'next/image';
 
 export default function CriarProduto() {
     const [carregamento, setCarregamento] = useState(0);
     const [URL, setURL] = useState("");
-
+    const [touched, setTouched] = useState(false)
+    const [nome, setNome] = useState('')
     async function handleSubmit(event) {
         event.preventDefault();
         const data = {
-            nome: event.target.nome.value,
+            nome: nome,
             descricao: event.target.descricao.value,
             preco: event.target.preco.value,
             categoria: event.target.categoria.value,
@@ -28,12 +30,21 @@ export default function CriarProduto() {
     }
 
     function handleInput(e) {
+
         e.preventDefault()
         console.log("Entrou no input");
-
+        console.log(e);
+        if (touched) {
+            setURL("")
+            setTouched(!touched);
+            return;
+        }
+        else {
+            setTouched(true);
+        }
         const file = e.target.files[0];
         if (!file) return;
-        const storageREF = ref(Storage, `images/${file.name}`);
+        const storageREF = ref(Storage, `images/${nome}`);
         const uploadTask = uploadBytesResumable(storageREF, file);
 
         uploadTask.on(
@@ -77,6 +88,7 @@ export default function CriarProduto() {
                                                     id="nome"
                                                     className="block w-full px-4 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     placeholder="Detergente Clear"
+                                                    onChange={(e)=>setNome(e.target.value)}
                                                 />
                                             </div>
                                         </div>
@@ -105,8 +117,8 @@ export default function CriarProduto() {
                                                 id="descricao"
                                                 name="descricao"
                                                 rows={3}
-                                                className="px-2 mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                                                placeholder="Descrição do Produto à ser registrado no banco de dados"
+                                                className="p-2 mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                                                placeholder="Descrição do Produto a ser registrada no banco de dados"
                                                 defaultValue={''}
                                             />
                                         </div>
@@ -115,6 +127,9 @@ export default function CriarProduto() {
 
                                     <div>
                                         <label className="block text-sm font-medium leading-6 text-gray-900">Foto do Produto</label>
+
+                                        {!URL && <progress value={carregamento} max={100} className={`${touched ? 'w-full h-2 rounded-full bg-blue-500' : 'hidden'}`} />}
+                                        {touched? <div className='flex justify-center' onClick={(e)=>handleInput(e)}><img src={URL} className='p-1 outline-dashed outline-1'/> </div>:
                                         <div className="mt-2 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                             <div className="space-y-1 text-center">
                                                 <svg
@@ -144,8 +159,7 @@ export default function CriarProduto() {
                                                 <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                             </div>
                                         </div>
-                                        {!URL && <progress value={carregamento} max={100} />}
-                                        {URL && <img src={URL} alt="Imagem" />}
+                                    }
                                     </div>
                                     <div>
                                         <div className="grid">
@@ -174,27 +188,3 @@ export default function CriarProduto() {
 
 
 
-
-
-
-// export default function CriarProduto() {
-//     const [foto, setFoto] = useState()
-
-//     return (
-//         <>
-//             <form action="" className="grid justify-center mt-10">
-//                 <label htmlFor="picture" className="w-96 bg-[#ddd] flex items-center justify-center text-[#aaa] border-dashed border-gray-400 border cursor-pointer aspect-2">
-//                     <span className="picture_span">{foto ? "tem foto" : 'Escolha uma imagem'}</span>
-//                     <input type="file"
-//                         name="picture"
-//                         id="picture"
-//                         accept="image/*"
-//                         className="hidden"
-//                         onChange={(e) => setFoto(e.target.files[0])} />
-//                 </label>
-//                 <label htmlFor="nome">
-//                     <input type="text" name="nome" id="nome" />
-//                 </label>
-//             </form>
-//         </>);
-// }
