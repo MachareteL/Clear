@@ -1,20 +1,30 @@
-import { LockClosedIcon } from '@heroicons/react/20/solid'
+import { LockClosedIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { Quicksand } from '@next/font/google'
+
+const quick = Quicksand({
+  subsets: ['latin'],
+  weight: 'variable'
+})
 
 export default function Login() {
   return (
     <>
+    <Link href="/" className='absolute flex items-center h-10 left-6 top-12 group md:left-14'>
+      <ArrowLeftIcon className='h-6 group-hover:-translate-x-2 transition-all ease-out delay-100'/>
+      <span className={`${quick.className} text-lg`}>Voltar</span>
+    </Link>
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-10">
           <div>
-            <h1 className={`text-center text-5xl`}>Clear</h1>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Faça login
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                start your 14-day free trial
-              </a>
+              Ou{' '}
+              <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                registre-se aqui
+              </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">

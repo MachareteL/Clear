@@ -1,7 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
-import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
+import { UserIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -80,16 +80,14 @@ export default function NavBar() {
                   </div>
                 </div>
               </div>
-              <div className="absolute justify-between w-fit md:w-36 inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
+              <div className="absolute justify-evenly w-fit md:w-28 inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
 
 
                 {/* Profile dropdown */}
-                <button className='hidden md:block' onClick={() => console.log('e')}>
-                  <HeartIcon className='w-8 h-auto text-indigo-600 cursor-pointer hover:text-[#96116b]' />
-                </button>
+                
 
                 <button className='hidden md:block' onClick={() => setOpen(true)}>
-                  <ShoppingCartIcon className='w-8 h-auto text-indigo-600 cursor-pointer hover:text-[#96116b]' />
+                  <ShoppingCartIcon className='w-8 h-auto text-indigo-600 cursor-pointer hover:text-[#96116b] transition-colors ease-linear delay-75' />
                 </button>
                 <Carrinho abrido={aberto} desabrido={() => setOpen(!aberto)} />
 

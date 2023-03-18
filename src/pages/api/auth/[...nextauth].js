@@ -28,7 +28,7 @@ export const authOptions = {
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        email: { label: "Username", type: "text", placeholder: "jsmith", value:'lucas@gmail.com' },
+        email: { label: "Email", type: "email", placeholder: "jsmith", value:'lucas@gmail.com' },
         password: { label: "Password", type: "password" },
         cpf: { label: "cpf", type: "text", placeholder: "XXX.XXX.XXX-XX"},
       },

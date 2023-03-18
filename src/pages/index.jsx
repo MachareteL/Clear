@@ -41,6 +41,13 @@ const callouts = [
     imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
     href: '#',
   },
+  {
+    name: 'Detergente',
+    description: 'Daily commute essentials',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
+    imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
+    href: '#',
+  },
 ]
 
 export default function Home() {
@@ -50,7 +57,6 @@ export default function Home() {
   }
   return (
     <>
-      <button onClick={pegarSessao}>Pegar sessao</button>
       <Swiper
         modules={[Autoplay]}
         loop={true}
@@ -95,7 +101,7 @@ export default function Home() {
           {/* sabao, desinferante, Detergente, Limpa +, Cloro */}
 
           <div className="bg-gray-100 w-full">
-            <div className="max-w-7xl px-4">
+            <div className="px-4">
               <div className="mx-auto max-w-2xl py-8   lg:max-w-none">
                 <span className={`${quick.className} font-medium tracking-tight text-gray-500 text-2xl`}>Nossos produtos disponíveis</span>
 
@@ -103,25 +109,25 @@ export default function Home() {
 
                 <div className="mt-6 space-y-12 lg:grid lg:grid-cols-5 lg:gap-x-6 lg:space-y-0">
                   {callouts.map((callout) => (
-                    
+
                     <div key={callout.name} className="group relative">
-                        <Link href="/produtos">
-                        <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                          <img
-                            src={callout.imageSrc}
-                            alt={callout.imageAlt}
-                            className="h-full w-full object-cover object-center"
-                          />
+                        <div>
+                          <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                            <img
+                              src={callout.imageSrc}
+                              alt={callout.imageAlt}
+                              className="h-full w-full object-cover object-center"
+                            />
+                          </div>
+                          <h3 className="mt-6 text-sm text-gray-500">
+                            <Link href="/produtos">
+                              <span className="absolute inset-0" />
+                              {callout.name}
+                            </Link>
+                          </h3>
+                          <p className="text-base font-semibold text-gray-900">{callout.description}</p>
                         </div>
-                        <h3 className="mt-6 text-sm text-gray-500">
-                          <a href={callout.href}>
-                            <span className="absolute inset-0" />
-                            {callout.name}
-                          </a>
-                        </h3>
-                        <p className="text-base font-semibold text-gray-900">{callout.description}</p>
-                    </Link>
-                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
