@@ -9,35 +9,15 @@ const quick = Quicksand({
 
 
 
-export default function Produtos() {
+export default function Produtos({}) {
+    const products = [{
+        nome: "teste"
+    }]
     const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
     const removeProduto = useContext(RemoveCartContext)
-    const products = [
-        {
-            _id: 1,
-            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
-            imageAlt: 'teste',
-            nome: "Product One",
-            preco: 20
-        },
-        {
-            _id: 2,
-            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
-            imageAlt: 'teste',
-            nome: "Product Two",
-            preco: 30
-        },
-        {
-            _id: 3,
-            imageSrc: 'https://macharetelucas.com.br/img/cards/img3.png',
-            imageAlt: 'teste',
-            nome: "Product Three",
-            preco: 33
-        },
-    ];
-
     const [carrinho, setCarrinho] = useState([])
+    console.log(products);
 
     const handleAdd = (produto) => {
         addItems(produto)
@@ -81,4 +61,20 @@ export default function Produtos() {
                 </div>
             </div>
         </>);
+}
+
+export async function getServerSideProps(){
+    const res = await fetch('http://localhost:3000/api/produtos',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'SECURE_KEY': "316KMH"
+        }
+    })
+    const data = await res.json()
+    return {
+        props: {
+            products: data
+        }
+    }
 }

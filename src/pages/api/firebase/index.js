@@ -10,7 +10,7 @@ export default function handler(req, res) {
     signInWithEmailAndPassword(auth, body.email, body.password)
         .then( async (userCredential) => {
             console.log("entrou no deu certo");
-            const db = getFirestore();
+            const db = getFirestore(app);
             const docRef = db.collection('users').doc(userCredential.user.reloadUserInfo.localId);
 
             await docRef.set({
