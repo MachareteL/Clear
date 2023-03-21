@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
       <RemoveCartContext.Provider
         value={useCallback((item) => {
           const newItems = itemsRef.current.filter(
-            (_item) => _item._id !== item._id
+            (_item) => _item.nome != item.nome
           );
           setItems(newItems);
         }, [])}

@@ -23,7 +23,7 @@ export default function Carrinho({ abrido, desabrido }) {
   };
 
   const addItems = useContext(AddCartContext);
-  
+
   useEffect(() => {
     let prev_items = JSON.parse(localStorage.getItem('cart')) || [];
     addItems(prev_items)
@@ -37,6 +37,21 @@ export default function Carrinho({ abrido, desabrido }) {
       total();
     }
   }, [items]);
+
+  const produtos = useContext(CartContext)
+  const removeProduto = useContext(RemoveCartContext)
+
+  function handleQtd(produto, qtd) {
+    addItems(produto)
+        produtos.map(async (produtinho) => {
+            if (produto.nome == produtinho.nome) {
+                await removeProduto(produtinho)
+                produto = { ...produto, qtd:  qtd}
+                addItems(produto)
+            }
+
+        })
+  }
 
   return (
     <Transition.Root show={abrido} as={Fragment}>
@@ -86,12 +101,12 @@ export default function Carrinho({ abrido, desabrido }) {
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {items.length > 0 ? items.map((product) => (
-                              <li key={product._id} className="flex py-6">
+                              <li key={product.nome} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src='https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg'
+                                    src={product.imagem}
                                     alt={product.nome}
-                                    className="h-full w-full object-cover object-center"
+                                    className="h-full w-full object-contain object-center"
                                   />
                                 </div>
 
@@ -99,14 +114,28 @@ export default function Carrinho({ abrido, desabrido }) {
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={product.href}>{product.nome}</a>
+                                        <p>{product.nome}</p>
                                       </h3>
                                       <p className="ml-4">{product.categoria}</p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">{product.nome}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.qtd}</p>
+
+                                    <p className="text-gray-500">Qtd
+                                    <select name="qtd" id="qtd" value={product.qtd} onChange={event=>handleQtd(product, event.target.value)}>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                      <option value="5">5</option>
+                                      <option value="6">6</option>
+                                      <option value="7">7</option>
+                                      <option value="8">8</option>
+                                      <option value="9">9</option>
+                                      <option value="10">10</option>
+                                    </select>
+                                    </p>
 
                                     <div className="flex">
                                       <button

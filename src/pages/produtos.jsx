@@ -1,6 +1,7 @@
 import { Quicksand } from "@next/font/google";
 import { useContext, useState } from "react";
 import { AddCartContext, CartContext, RemoveCartContext } from "@/context/Context";
+import Swal from "sweetalert2";
 
 const quick = Quicksand({
     weight: 'variable',
@@ -10,30 +11,34 @@ const quick = Quicksand({
 
 
 export default function Produtos({products}) {
-    console.log('printando produtos na function produtos:',products);
     const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
     const removeProduto = useContext(RemoveCartContext)
-    const [carrinho, setCarrinho] = useState([])
+    const items = useContext(CartContext);
 
     const handleAdd = (produto) => {
         addItems(produto)
         produtos.map(async (produtinho) => {
-            if (produto._id == produtinho._id) {
+            if (produto.nome == produtinho.nome) {
                 await removeProduto(produtinho)
                 produto = { ...produto, qtd: produtinho.qtd + 1 }
                 addItems(produto)
             }
-
         })
+        Swal.fire({text:`${produto.nome} adicionado com sucesso`, icon:'success'})
+    }
+    function teste(params) {
+        const aa = items.reduce((param1, param2)=> param1.preco + param2.preco, 0);
+        console.log(aa);
     }
     return (
         <>
+        <button onClick={teste}>TESTAR</button>
             <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 className={`${quick.className} text-2xl font-bold tracking-tight text-gray-900`}>Nossos produtos</h2>
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
-                        <div key={product._id} className="group relative" onClick={event => handleAdd({ ...product, qtd: 1 })}>
+                        <div key={product.nome} className="group relative" onClick={event => handleAdd({ ...product, qtd: 1 })}>
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
                                     src={product.imagem}
