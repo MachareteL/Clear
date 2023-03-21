@@ -9,13 +9,12 @@ const quick = Quicksand({
 })
 
 
-
 export default function Produtos({products}) {
     const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
     const removeProduto = useContext(RemoveCartContext)
     const items = useContext(CartContext);
-
+    
     const handleAdd = (produto) => {
         addItems(produto)
         produtos.map(async (produtinho) => {
@@ -28,8 +27,10 @@ export default function Produtos({products}) {
         Swal.fire({text:`${produto.nome} adicionado com sucesso`, icon:'success'})
     }
     function teste(params) {
-        const aa = items.reduce((param1, param2)=> param1.preco + param2.preco, 0);
-        console.log(aa);
+        items.forEach((element) => {
+            const valor = element.preco
+            
+        });        
     }
     return (
         <>
