@@ -1,5 +1,5 @@
 import { Quicksand } from "@next/font/google";
-import { useCallback, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AddCartContext, CartContext, RemoveCartContext } from "@/context/Context";
 
 const quick = Quicksand({
@@ -9,15 +9,12 @@ const quick = Quicksand({
 
 
 
-export default function Produtos({}) {
-    const products = [{
-        nome: "teste"
-    }]
+export default function Produtos({products}) {
+    console.log('printando produtos na function produtos:',products);
     const produtos = useContext(CartContext)
     const addItems = useContext(AddCartContext);
     const removeProduto = useContext(RemoveCartContext)
     const [carrinho, setCarrinho] = useState([])
-    console.log(products);
 
     const handleAdd = (produto) => {
         addItems(produto)
@@ -39,8 +36,8 @@ export default function Produtos({}) {
                         <div key={product._id} className="group relative" onClick={event => handleAdd({ ...product, qtd: 1 })}>
                             <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80 cursor-pointer">
                                 <img
-                                    src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    src={product.imagem}
+                                    alt={product.nome}
                                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                 />
                             </div>
