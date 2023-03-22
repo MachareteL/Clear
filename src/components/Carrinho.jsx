@@ -43,14 +43,14 @@ export default function Carrinho({ abrido, desabrido }) {
 
   function handleQtd(produto, qtd) {
     addItems(produto)
-        produtos.map(async (produtinho) => {
-            if (produto.nome == produtinho.nome) {
-                await removeProduto(produtinho)
-                produto = { ...produto, qtd:  qtd}
-                addItems(produto)
-            }
+    produtos.map(async (produtinho) => {
+      if (produto.nome == produtinho.nome) {
+        await removeProduto(produtinho)
+        produto = { ...produto, qtd: qtd }
+        addItems(produto)
+      }
 
-        })
+    })
   }
 
   return (
@@ -123,18 +123,18 @@ export default function Carrinho({ abrido, desabrido }) {
                                   <div className="flex flex-1 items-end justify-between text-sm">
 
                                     <p className="text-gray-500">Qtd
-                                    <select name="qtd" id="qtd" value={product.qtd} onChange={event=>handleQtd(product, event.target.value)}>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                      <option value="5">5</option>
-                                      <option value="6">6</option>
-                                      <option value="7">7</option>
-                                      <option value="8">8</option>
-                                      <option value="9">9</option>
-                                      <option value="10">10</option>
-                                    </select>
+                                      <select className='cursor-pointer appearance-none ml-2 px-1 border-b border-gray-900 text-end' name="qtd" id="qtd" value={product.qtd} onChange={event => handleQtd(product, event.target.value)}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                      </select>
                                     </p>
 
                                     <div className="flex">

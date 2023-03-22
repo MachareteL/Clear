@@ -26,11 +26,13 @@ export default function Produtos({products}) {
         })
         Swal.fire({text:`${produto.nome} adicionado com sucesso`, icon:'success'})
     }
+
     function teste(params) {
+        let acumulador = 0
         items.forEach((element) => {
-            const valor = element.preco
-            
-        });        
+            acumulador += (element.preco * 1)
+        });
+        console.log(acumulador);
     }
     return (
         <>

@@ -1,6 +1,7 @@
 import { LockClosedIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { Quicksand } from '@next/font/google'
+import { TextField } from '@mui/material'
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -8,21 +9,27 @@ const quick = Quicksand({
 })
 
 export default function Login() {
+  
   return (
     <>
     <Link href="/" className='absolute flex items-center h-10 left-6 top-12 group md:left-14'>
       <ArrowLeftIcon className='h-6 group-hover:-translate-x-2 transition-all ease-out delay-100'/>
       <span className={`${quick.className} text-lg`}>Voltar</span>
     </Link>
+
+
+    
+    
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-10">
           <div>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Faça login
+              Bem-Vindo!
             </h2>
+            
             <p className="mt-2 text-center text-sm text-gray-600">
-              Ou{' '}
-              <Link href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Faça Login ou{' '}
+              <Link href="/login/signup" className="font-medium underline underline-offset-1 text-indigo-600 hover:text-indigo-500 active:text-indigo-500">
                 registre-se aqui
               </Link>
             </p>
@@ -31,7 +38,9 @@ export default function Login() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label htmlFor="email-address" className="sr-only">
+                <TextField sx={{height:55}} variant="filled" label="E-mail" className='w-full appearance-none  border-gray-300 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
+
+                {/* <label htmlFor="email-address" className="sr-only">
                   Email address
                 </label>
                 <input
@@ -42,10 +51,10 @@ export default function Login() {
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Email address"
-                />
+                /> */}
               </div>
               <div>
-                <label htmlFor="password" className="sr-only">
+                {/* <label htmlFor="password" className="sr-only">
                   Password
                 </label>
                 <input
@@ -56,7 +65,9 @@ export default function Login() {
                   required
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"
-                />
+                /> */}
+                <TextField sx={{height:55, p: 0}} variant="filled" label="Senha" className='w-full appearance-none  text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
+
               </div>
             </div>
 
@@ -75,7 +86,7 @@ export default function Login() {
 
               <div className="text-sm">
                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot your password?
+                  Esqueci minha senha
                 </a>
               </div>
             </div>
