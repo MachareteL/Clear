@@ -13,3 +13,4 @@ https://www.hubble.net/
 https://www.youtube.com/watch?v=QTD9L0jL0dU
 https://www.figma.com/community/file/1207764773146400905
 https://tailwindui.com/components/ecommerce/components/product-lists
+https://makerkit.dev/blog/tutorials/nextjs-google-analytics

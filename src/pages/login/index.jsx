@@ -9,12 +9,11 @@ const quick = Quicksand({
 })
 
 export default function Login() {
-  
   return (
     <>
     <Link href="/" className='absolute flex items-center h-10 left-6 top-12 group md:left-14'>
       <ArrowLeftIcon className='h-6 group-hover:-translate-x-2 transition-all ease-out delay-100'/>
-      <span className={`${quick.className} text-lg`}>Voltar</span>
+      <span className={`${quick.className} text-lg ml-4`}>Voltar</span>
     </Link>
 
 
@@ -93,7 +92,6 @@ export default function Login() {
 
             <div>
               <button
-                type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
