@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import React, { Component } from 'react';
+import SignupForm from '../formik';
+import SecondStep from '@/components/SecondStep';
 
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
@@ -28,7 +30,16 @@ export default function HorizontalNonLinearStepper() {
   const allStepsCompleted = () => {
     return completedSteps() === totalSteps();
   };
-
+  function _handleActiveForm(step){
+    switch (step) {
+      case 0:
+        return <SignupForm />
+      case 1:
+        return <SecondStep />        
+      default:
+        return <div>Deu erro</div>
+    }
+  }
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
@@ -84,9 +95,7 @@ export default function HorizontalNonLinearStepper() {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-              testeee
-            </Typography>
+            {_handleActiveForm(activeStep)}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"

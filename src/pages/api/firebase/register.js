@@ -3,9 +3,9 @@ import app from "../../../lib/firebaseConfig"
 
 export default function handler(req, res) {
     const auth = getAuth(app);
-    const email = 'gustavo@gmail.com';
-    const password = '654321';
-    createUserWithEmailAndPassword(auth, email, password)
+    const body = req.body;
+    console.log(body);
+    createUserWithEmailAndPassword(auth, body.email, body.password)
         .then((userCredential) => {
             console.log("entrou no deu certo");
             const user = userCredential.user;
@@ -16,7 +16,6 @@ export default function handler(req, res) {
             const errorCode = error.code;
             console.log(errorCode);
             const errorMessage = error.message;
-            console.log(typeof(errorMessage));
             res.status(404).json({ teste: 'ta dando erro' });
         });
 

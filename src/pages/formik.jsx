@@ -84,20 +84,22 @@ function SignupForm() {
 
     return (
         <>
-            <h1>Inscreva-se!</h1>
-            <Formik 
-            
-            initialValues={{
-                nome: "",
-            }}
+            <Formik
+
+                initialValues={{
+                    nome: "",
+                }}
                 validationSchema={esquemaValidacao}
                 onSubmit={async (values, { setSubmitting }) => {
                     await new Promise(r => setTimeout(r, 500));
                     setSubmitting(false);
                 }}>
-                <Form className='container m-auto'>
-                    
-                <OutlinedInput className="w-full h-10" label="teste"/>
+                <Form className='container grid'>
+                    <FormControl>
+
+                        <InputLabel htmlFor="teste">ola</InputLabel>
+                        <OutlinedInput className="w-full" name="teste" label='testellllllllllllllll'/>
+                    </FormControl>
                 </Form>
             </Formik>
         </>
