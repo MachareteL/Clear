@@ -4,6 +4,8 @@ import { Quicksand } from '@next/font/google'
 import { Box, TextField } from '@mui/material'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -12,13 +14,25 @@ const quick = Quicksand({
 
 export default function Login() {
   const [userInfo, setUserInfo] = useState({email: '', password: ''});
-  function _handleLogin(e){
+  const rota = useRouter()
+  async function _handleLogin(e){
     e.preventDefault()
-    signIn('credentials',{
+    const res = await signIn('credentials',{
       email: userInfo.email,
       password: userInfo.password,
-      cpf: ''
+      cpf: '',
+      redirect:false
     })
+    if (res?.error){
+      console.log('notok');
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: res.error
+      })
+    }else{
+      rota.push('/')
+    }
   }
   return (
     <>

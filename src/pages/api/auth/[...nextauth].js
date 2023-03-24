@@ -49,7 +49,7 @@ export const authOptions = {
           headers: { "Content-Type": "application/json" }
         })
         const user = await res.json()
-        console.log("o usuario retornado da api é:",user);
+        // console.log("o usuario retornado da api é:",user);
         // If no error and we have user data, return it
         if (res.status == 200 && user) {
           console.log("está logado");
