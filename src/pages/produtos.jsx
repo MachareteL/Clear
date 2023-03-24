@@ -28,10 +28,7 @@ export default function Produtos({products}) {
     }
 
     function teste(params) {
-        let acumulador = 0
-        items.forEach((element) => {
-            acumulador += (element.preco * 1)
-        });
+        
         console.log(acumulador);
     }
     return (

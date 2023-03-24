@@ -19,7 +19,11 @@ export default function Carrinho({ abrido, desabrido }) {
 
 
   const total = () => {
-    setCartTotal(items.reduce((acc, item) => acc + item.preco, 0));
+    let acumulador = 0
+        items.forEach((element) => {
+            acumulador += ((element.preco * 1)*element.qtd)
+        });
+    setCartTotal(acumulador);
   };
 
   const addItems = useContext(AddCartContext);
