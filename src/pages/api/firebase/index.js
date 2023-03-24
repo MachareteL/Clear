@@ -6,7 +6,6 @@ export default function handler(req, res) {
     const auth = getAuth(app);
     const body = req.body;
     const db = getFirestore(app);
-
     signInWithEmailAndPassword(auth, body.email, body.password)
         .then( async (userCredential) => {
             console.log("entrou no deu certo");

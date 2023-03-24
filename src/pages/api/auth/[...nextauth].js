@@ -18,6 +18,10 @@ export const authOptions = {
         : undefined,
     })
   }),
+  pages:{
+    signIn:"/login"
+  },
+  secret:'JVJKgx4v/t9uxJKBP+LC+kH6Jg7fRQdBYi7M4tGe/Z8=',
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -61,6 +65,7 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
+  
   
 }
 

@@ -2,6 +2,8 @@ import { LockClosedIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { Quicksand } from '@next/font/google'
 import { Box, TextField } from '@mui/material'
+import { useState } from 'react'
+import { signIn } from 'next-auth/react'
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -9,6 +11,15 @@ const quick = Quicksand({
 })
 
 export default function Login() {
+  const [userInfo, setUserInfo] = useState({email: '', password: ''});
+  function _handleLogin(e){
+    e.preventDefault()
+    signIn('credentials',{
+      email: userInfo.email,
+      password: userInfo.password,
+      cpf: ''
+    })
+  }
   return (
     <>
     <Link href="/" className='absolute flex items-center h-10 left-6 top-12 group md:left-14'>
@@ -38,8 +49,8 @@ export default function Login() {
             <div className="-space-y-px rounded-md shadow-sm">
                 <Box >
 
-                <TextField sx={{height:55, borderColor: 'red'}} variant="filled" label="E-mail" className='w-full  appearance-none border-red-500 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
-                <TextField sx={{height:55, p: 0}} variant="filled" label="Senha" className='w-full appearance-none  text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
+                <TextField value={userInfo.email} onChange={event=>setUserInfo({...userInfo, email:event.target.value})} sx={{height:55, borderColor: 'red'}} variant="filled" label="E-mail" className='w-full  appearance-none border-red-500 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
+                <TextField value={userInfo.password} onChange={event=>setUserInfo({...userInfo, password: event.target.value})} sx={{height:55, p: 0}} variant="filled" label="Senha" className='w-full appearance-none  text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'/>
 
                 </Box>
             </div>
@@ -66,6 +77,7 @@ export default function Login() {
 
             <div>
               <button
+                onClick={_handleLogin}
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
