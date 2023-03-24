@@ -10,7 +10,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   const router = useRouter();
-  const rotaLogin = router.pathname == '/login' || router.pathname == '/login/signup' ? false : true
+  const rotaLogin = router.pathname == '/login' || router.pathname == '/login/register' ? false : true
 
   return (
     <CartProvider>

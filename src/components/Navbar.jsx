@@ -1,7 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
-import { UserIcon, ShoppingCartIcon } from '@heroicons/react/24/solid'
+import { ShoppingCartIcon } from '@heroicons/react/24/solid'
 import { Pacifico, Quicksand } from '@next/font/google'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -45,7 +45,6 @@ export default function NavBar() {
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
@@ -53,7 +52,7 @@ export default function NavBar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-between">
+              <div className="flex flex-1 items-center justify-start ml-10 md:items-stretch md:justify-between">
                 <div className="flex flex-shrink-0 items-center cursor-pointer" onClick={() => route.push('/')}>
                   <img
                     className="block w-16 h-auto logo"
@@ -86,7 +85,7 @@ export default function NavBar() {
                 {/* Profile dropdown */}
                 
 
-                <button className='hidden md:block' onClick={() => setOpen(true)}>
+                <button className='mr-2' onClick={() => setOpen(true)}>
                   <ShoppingCartIcon className='w-8 h-auto text-indigo-600 cursor-pointer hover:text-[#96116b] transition-colors ease-linear delay-75' />
                 </button>
                 <Carrinho abrido={aberto} desabrido={() => setOpen(!aberto)} />
@@ -114,7 +113,7 @@ export default function NavBar() {
                     as="a"
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      item.current ? 'text-[#96116b] underline underline-offset-1' : 'text-indigo-600 hover:bg-indigo-700 hover:text-white',
                       'block px-3 py-2 rounded-md text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}

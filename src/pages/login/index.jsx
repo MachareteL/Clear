@@ -28,7 +28,7 @@ export default function Login() {
             
             <p className="mt-2 text-center text-sm text-gray-600">
               Faça Login ou{' '}
-              <Link href="/login/signup" className="font-medium underline underline-offset-1 text-indigo-600 hover:text-indigo-500 active:text-indigo-500">
+              <Link href="/login/register" className="font-medium underline underline-offset-1 text-indigo-600 hover:text-indigo-500 active:text-indigo-500">
                 registre-se aqui
               </Link>
             </p>
