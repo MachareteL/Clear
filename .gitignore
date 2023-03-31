@@ -8,6 +8,7 @@
 # testing
 /coverage
 
+/src/pages/teste.jsx
 # next.js
 /.next/
 /out/
@@ -30,3 +31,5 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+*.p12
