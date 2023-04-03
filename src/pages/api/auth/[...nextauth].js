@@ -53,6 +53,7 @@ export const authOptions = {
         // If no error and we have user data, return it
         if (res.status == 200 && user) {
           console.log("está logado");
+          console.log(user.user);
           return user.user
         }
         // Return null if user data could not be retrieved

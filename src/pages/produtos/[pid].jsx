@@ -2,7 +2,10 @@ import { Quicksand } from "@next/font/google";
 import { useContext, useState } from "react";
 import { AddCartContext, CartContext, RemoveCartContext } from "@/context/Context";
 import Swal from "sweetalert2";
-
+import { getSession, useSession, getCsrfToken } from "next-auth/react";
+import { getAuth } from "firebase/auth";
+import { app } from "@/lib/firebaseConfig";
+import { getApp } from "firebase/app";
 const quick = Quicksand({
     weight: 'variable',
     subsets: ['latin']
@@ -27,9 +30,10 @@ export default function Produtos({products}) {
         Swal.fire({text:`${produto.nome} adicionado com sucesso`, icon:'success'})
     }
 
-    function teste(params) {
-        
-        console.log(acumulador);
+
+    async function teste(params) {
+        const user = await getAuth()
+        console.log(user);
     }
     return (
         <>

@@ -38,6 +38,7 @@ export default function Login() {
       }
     })
     const resposta = await batida.json()
+    
     if (resposta.user) {
       Swal.fire({title: "Usuario criado com sucesso!", text:"Seja bem-vindo à loja de Produtos Clear!", icon:"success"})
       .then(() => {rota.push('/login')})
