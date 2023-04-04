@@ -64,7 +64,7 @@ export default function Carrinho({ abrido, desabrido }) {
   async function checkout(){
     const batida = await fetch('/api/firebase/createPedido', {
       method: 'POST',
-      body: JSON.stringify({lista : items})
+      body: JSON.stringify({lista : items, subtotal: cartTotal})
     })
     const retorno = await batida.json()
     console.log(retorno);
