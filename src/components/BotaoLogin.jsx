@@ -17,7 +17,7 @@ export default function BotaoLogin() {
 
 
   if (session) {
-    const foto = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevelopers.elementor.com%2Fdocs%2Fhooks%2Fplaceholder-image%2F&psig=AOvVaw01dMw8eigiWorOheOQxwWM&ust=1679078073313000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCPig_NuL4f0CFQAAAAAdAAAAABAE'
+    const foto = 'https://via.placeholder.com/150'
     return (
       <>
         <Menu as="div" className="relative ml-3">
@@ -52,16 +52,16 @@ export default function BotaoLogin() {
                           </a>
                         )}
                       </Menu.Item> */}
-              {/* <Menu.Item>
+              <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="/matricula/alunos"
+                            href="/checkout/pending"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
                           </a>
                         )}
-                      </Menu.Item> */}
+                      </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
                   <button onClick={() => signOut({ callbackUrl: '/' })} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 w-full text-start')}> Deslogar </button>

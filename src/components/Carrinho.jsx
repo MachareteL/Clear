@@ -4,29 +4,35 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { CartContext, RemoveCartContext, AddCartContext } from '@/context/Context';
+import { useRouter } from 'next/router';
 
 // see https://stackoverflow.com/questions/65523588/react-cart-with-context-and-localstorage 
 
 
 export default function Carrinho({ abrido, desabrido }) {
 
-  const [carrinho, setCarrinho] = useState([])
-
+  const rota = useRouter()
   const items = useContext(CartContext);
   const removeItem = useContext(RemoveCartContext);
+  const addItems = useContext(AddCartContext);
+  // const [carrinho, setCarrinho] = useState([])
   const [cartTotal, setCartTotal] = useState(0);
   const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
+  
 
-
+  
   const total = () => {
     let acumulador = 0
-        items.forEach((element) => {
-            acumulador += ((element.preco * 1)*element.qtd)
-        });
+    items.forEach((element) => {
+      acumulador += ((element.preco * 1)*element.qtd)
+    });
     setCartTotal(acumulador);
   };
+  
+  useEffect(()=>{
+    rota.events.on('routeChangeComplete', desabrido)
 
-  const addItems = useContext(AddCartContext);
+  }, [rota])
 
   useEffect(() => {
     let prev_items = JSON.parse(localStorage.getItem('cart')) || [];
@@ -42,14 +48,12 @@ export default function Carrinho({ abrido, desabrido }) {
     }
   }, [items]);
 
-  const produtos = useContext(CartContext)
-  const removeProduto = useContext(RemoveCartContext)
 
   function handleQtd(produto, qtd) {
     addItems(produto)
-    produtos.map(async (produtinho) => {
+    items.map(async (produtinho) => {
       if (produto.nome == produtinho.nome) {
-        await removeProduto(produtinho)
+        await removeItem(produtinho)
         produto = { ...produto, qtd: qtd }
         addItems(produto)
       }
@@ -57,6 +61,15 @@ export default function Carrinho({ abrido, desabrido }) {
     })
   }
 
+  async function checkout(){
+    const batida = await fetch('/api/firebase/createPedido', {
+      method: 'POST',
+      body: JSON.stringify({lista : items})
+    })
+    const retorno = await batida.json()
+    console.log(retorno);
+    localStorage.setItem('cart', [0])
+  }
   return (
     <Transition.Root show={abrido} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={desabrido}>
@@ -88,7 +101,7 @@ export default function Carrinho({ abrido, desabrido }) {
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                        <Dialog.Title className="text-lg font-medium text-gray-900">Carrinho de Compras</Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -152,7 +165,7 @@ export default function Carrinho({ abrido, desabrido }) {
                                   </div>
                                 </div>
                               </li>
-                            )) : <>Seu carrinho está vazio</>}
+                            )) : <>Adicione os <Link href={'/produtos/all'} className='underline text-indigo-500'>produtos</Link> na pagina do catálogo. </>}
                           </ul>
                         </div>
                       </div>
@@ -163,24 +176,24 @@ export default function Carrinho({ abrido, desabrido }) {
                         <p>Subtotal</p>
                         <p>R${cartTotal}</p>
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                      <p className="mt-0.5 text-sm text-gray-500">Valor total da compra.</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <button
+                          onClick={checkout}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          or {' '}
+                          ou {' '}
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
                             <Link href="/produtos">
-                              Continue Shopping
+                              Ver mais produtos
                             </Link>
                             <span aria-hidden="true"> &rarr;</span>
                           </button>

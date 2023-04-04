@@ -27,8 +27,8 @@ export default function NavBar() {
   const route = useRouter()
   const navigation = [
     { name: 'HomePage', href: '/', current: (route.pathname == "/" ? true : false) },
-    { name: 'Produtos', href: '/produtos', current: (route.pathname == "/produtos" ? true : false) },
-    { name: 'Projects', href: '#', current: false },
+    { name: 'Produtos', href: '/produtos/all', current: (route.pathname == "/produtos/all" ? true : false) },
+    { name: 'Meus pedidos', href: '/checkout/pending', current: (route.pathname == "/checkout/pending" ? true : false)},
     { name: 'Calendar', href: '#', current: false },
   ]
   const [aberto, setOpen] = useState(false)
@@ -88,7 +88,7 @@ export default function NavBar() {
                 <button className='mr-2' onClick={() => setOpen(true)}>
                   <ShoppingCartIcon className='w-8 h-auto text-indigo-600 cursor-pointer hover:text-[#96116b] transition-colors ease-linear delay-75' />
                 </button>
-                <Carrinho abrido={aberto} desabrido={() => setOpen(!aberto)} />
+                <Carrinho abrido={aberto} desabrido={() => setOpen(false)} />
 
 
                 <BotaoLogin />
