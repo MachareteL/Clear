@@ -27,7 +27,7 @@ export default function NavBar() {
   const route = useRouter()
   const navigation = [
     { name: 'HomePage', href: '/', current: (route.pathname == "/" ? true : false) },
-    { name: 'Produtos', href: '/produtos/all', current: (route.pathname == "/produtos/all" ? true : false) },
+    { name: 'Produtos', href: '/produtos/all', current: (route.pathname.includes('/produtos/') ? true : false) },
     { name: 'Meus pedidos', href: '/checkout/pending', current: (route.pathname == "/checkout/pending" ? true : false)},
     { name: 'Calendar', href: '#', current: false },
   ]

@@ -32,7 +32,7 @@ export default function Produtos({products}) {
 
 
     async function teste(params) {
-        const usere = await fetch('/api/firebase/getuser')
+        const usere = await fetch('/api/firebase/getUser')
         const user = await usere.json()
         console.log(user);
     }
