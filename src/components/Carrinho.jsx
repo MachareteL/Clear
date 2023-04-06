@@ -69,6 +69,7 @@ export default function Carrinho({ abrido, desabrido }) {
     const retorno = await batida.json()
     console.log(retorno);
     localStorage.setItem('cart', [0])
+    rota.push('/checkout/pending')
   }
   return (
     <Transition.Root show={abrido} as={Fragment}>

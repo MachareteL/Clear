@@ -6,7 +6,10 @@ export async function middleware(request, response) {
   const batida = await fetch('http://localhost:3000/api/firebase/getUser')
   const { user } = await batida.json()
   console.log('MIDDLEWARE');
-  console.log(user);
+  if (!user) {
+    console.log("NÃO ESTÁ LOGADO MIDDLEWARE");
+  }
+  // console.log(user);
 }
 
 // See "Matching Paths" below to learn more
