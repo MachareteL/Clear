@@ -29,7 +29,7 @@ export default function NavBar() {
     { name: 'HomePage', href: '/', current: (route.pathname == "/" ? true : false) },
     { name: 'Produtos', href: '/produtos/all', current: (route.pathname.includes('/produtos/') ? true : false) },
     { name: 'Meus pedidos', href: '/checkout/pending', current: (route.pathname == "/checkout/pending" ? true : false)},
-    { name: 'Calendar', href: '#', current: false },
+    { name: 'Entre em Contato', href: '#', current: false },
   ]
   const [aberto, setOpen] = useState(false)
   

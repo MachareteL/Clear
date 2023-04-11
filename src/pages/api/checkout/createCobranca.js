@@ -4,11 +4,11 @@ import { readFileSync } from "fs";
 import path from 'path'
 
 export default async function handler(req, res) {
-    if (true) {
-        const teste = req.headers
-        console.log(teste);
-        const valor_cobranca = req.body.valor_cobranca
-    }
+    const valor_cobranca = req.body.valor_cobranca + '.00'
+    const CPF = ((req.body.CPF).replaceAll('.', '')).replaceAll('-', '')
+    let nome = ''
+    await fetch('http://localhost:3000/api/firebase/getUser').then(res => res.json()).then(res => nome = res)
+    console.log(nome);
     async function getToken() {
         const certificado = readFileSync(path.join(process.cwd()) + '/SenaiProd.p12');
         const credenciais = {
@@ -50,8 +50,8 @@ export default async function handler(req, res) {
                 expiracao: 3600,
             },
             devedor: {
-                nome: "",
-                cpf: '',
+                nome: "Lucas Macharete",
+                cpf: CPF,
             },
             valor: {
                 original: valor_cobranca

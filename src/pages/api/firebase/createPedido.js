@@ -13,6 +13,7 @@ export default async function handler(req, res) {
         user: user.uid,
         email: user.email,
         subtotal: corpo.subtotal,
+        status: corpo.status
     })
     res.send({docRef})
 }

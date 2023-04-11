@@ -5,6 +5,7 @@ import { Box, FormControl, TextField } from '@mui/material'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import { AuthErrorCodes } from 'firebase/auth'
 
 const quick = Quicksand({
   subsets: ['latin'],
@@ -38,13 +39,15 @@ export default function Login() {
       }
     })
     const resposta = await batida.json()
-    
     if (resposta.user) {
       Swal.fire({title: "Usuario criado com sucesso!", text:"Seja bem-vindo à loja de Produtos Clear!", icon:"success"})
       .then(() => {rota.push('/login')})
     }
+    else if (resposta.error.code == AuthErrorCodes.EMAIL_EXISTS){
+      Swal.fire({title: 'Email já cadastrado!', text:'Essa conta já existe! tente fazer login ou redefinir sua senha!', icon: 'info'})
+    }
     else{
-      Swal.fire({title: "Erro ao criar a sua conta :(", text:"Tente novamente ou fale com um dos nossos desenvolvedores!", icon:"error"})
+      Swal.fire({title: "Erro ao criar a sua conta :(", text:"Tente novamente ou entre em contato com um dos nossos desenvolvedores!", icon:"error"})
 
     }
   }

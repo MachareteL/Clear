@@ -17,12 +17,10 @@ export default function handler(req, res) {
 
         })
         .catch((error) => {
-            console.log("entrou no deu errado");
+            console.log("Error authenticating");
             const errorCode = error.code;
             console.log(errorCode);
-            const errorMessage = error.message;
-            res.status(401).json({ error })
-
+            res.status(409).json({ error })
         });
 
 }
