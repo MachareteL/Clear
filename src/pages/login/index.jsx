@@ -31,7 +31,7 @@ export default function Login() {
         text: res.error
       })
     }else{
-      rota.push('/')
+      return rota.push('/')
     }
   }
   return (

@@ -128,7 +128,7 @@ export default function CriarProduto() {
                                         <label className="block text-sm font-medium leading-6 text-gray-900">Foto do Produto</label>
 
                                         {!URL && <progress value={carregamento} max={100} className={`${touched ? 'w-full h-2 rounded-full bg-blue-500' : 'hidden'}`} />}
-                                        {touched ? <div className='flex justify-center md:justify-start' onClick={(e) => handleInput(e)}><img src={URL} className='p-1 outline-dashed outline-1 mt-5 max-h-96' /> </div> :
+                                        {touched ? <div className='flex justify-center md:justify-start' onClick={(e) => handleInput(e)}><img src={URL} className='mx-auto p-1 outline-dashed outline-1 mt-5 max-h-96' /> </div> :
                                             <div className="mt-2 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                                 <div className="space-y-1 text-center">
                                                     <svg

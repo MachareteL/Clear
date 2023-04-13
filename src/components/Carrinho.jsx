@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { CartContext, RemoveCartContext, AddCartContext } from '@/context/Context';
 import { useRouter } from 'next/router';
+import { getSession, useSession } from 'next-auth/react';
 
 // see https://stackoverflow.com/questions/65523588/react-cart-with-context-and-localstorage 
 
@@ -62,14 +63,15 @@ export default function Carrinho({ abrido, desabrido }) {
   }
 
   async function checkout(){
-    const batida = await fetch('/api/firebase/createPedido', {
+    const user = await getSession()
+    if (!user) {
+      return rota.push('/login')
+    }
+    await fetch('/api/firebase/createPedido', {
       method: 'POST',
       body: JSON.stringify({lista : items, subtotal: cartTotal, status: 'Pagamento Pendente'})
-    })
-    const retorno = await batida.json()
-    console.log(retorno);
-    localStorage.setItem('cart', [0])
-    rota.push('/checkout/pending')
+    }).then(()=>localStorage.setItem('cart', [0]))
+    return rota.push('/checkout/pending')
   }
   return (
     <Transition.Root show={abrido} as={Fragment}>
@@ -181,7 +183,7 @@ export default function Carrinho({ abrido, desabrido }) {
                       <div className="mt-6">
                         <button
                           onClick={checkout}
-                          className={items.length > 0 ? `flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 cursor-pointer`: `bg-gray-300 px-6 py-3 rounded-md cursor-not-allowed`}
+                          className={items.length > 0 ? `flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 cursor-pointer`: `bg-gray-300 px-6 py-3 rounded-md cursor-not-allowed text-gray-400`}
                           disabled={items.length == 0 ? true : false}
                         >
                           Checkout
