@@ -2,7 +2,7 @@ import { Disclosure, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import BotaoLogin from './BotaoLogin'
 import { ShoppingCartIcon } from '@heroicons/react/24/solid'
-import { Pacifico, Quicksand } from '@next/font/google'
+import { Pacifico, Quicksand } from "next/font/google"
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Carrinho from './Carrinho'

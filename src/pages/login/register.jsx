@@ -1,6 +1,6 @@
 import { LockClosedIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import { Quicksand } from '@next/font/google';
+import { Quicksand } from "next/font/google";
 import { Box, FormControl, TextField } from '@mui/material';
 import { useState } from 'react';
 import Swal from 'sweetalert2';

@@ -1,4 +1,4 @@
-import { Quicksand } from '@next/font/google';
+import { Quicksand } from "next/font/google";
 import React, { useState, Fragment } from 'react';
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';

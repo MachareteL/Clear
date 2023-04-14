@@ -1,4 +1,4 @@
-import { Quicksand } from '@next/font/google';
+import { Quicksand } from "next/font/google";
 import { useContext, useState } from 'react';
 import {
   AddCartContext,
