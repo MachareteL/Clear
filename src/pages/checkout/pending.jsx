@@ -1,33 +1,33 @@
-import { Quicksand } from "@next/font/google";
-import React, { useState, Fragment } from "react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { Timestamp } from "firebase/firestore";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
-import { Dialog, Transition } from "@headlessui/react";
-import { useEffect } from "react";
-import { TextField } from "@mui/material";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { Quicksand } from '@next/font/google';
+import React, { useState, Fragment } from 'react';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { Timestamp } from 'firebase/firestore';
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import { Dialog, Transition } from '@headlessui/react';
+import { useEffect } from 'react';
+import { TextField } from '@mui/material';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const quick = Quicksand({
-  subsets: ["latin"],
-  weight: "variable",
+  subsets: ['latin'],
+  weight: 'variable',
 });
 export default function pending({ pedidos }) {
   const [total, setTotal] = useState(0);
-  const [CPF, setCPF] = useState("");
+  const [CPF, setCPF] = useState('');
   const [qrCode, setQrCode] = useState({});
   const [erro, setErro] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
   const rota = useRouter();
 
   async function fazerPagamento(subtotal) {
-    await fetch("/api/checkout/createCobranca", {
-      method: "POST",
+    await fetch('/api/checkout/createCobranca', {
+      method: 'POST',
       body: JSON.stringify({ valor_cobranca: subtotal, CPF }),
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
     })
       .then((resposta) => resposta.json())
@@ -109,27 +109,27 @@ export default function pending({ pedidos }) {
                             if (isNaN(CPF[CPF.length - 1])) {
                               return CPF.substring(0, CPF.length - 1);
                             } else if (!isNaN(e.target.value)) {
-                              return e.target.value + ".";
+                              return e.target.value + '.';
                             } else return CPF;
                           } else if (CPF.length == 10) {
-                            console.log("sec if");
-                            if (!isNaN(e.target.value.replace(".", ""))) {
+                            console.log('sec if');
+                            if (!isNaN(e.target.value.replace('.', ''))) {
                               if (isNaN(CPF[CPF.length - 1])) {
                                 return CPF.substring(0, CPF.length - 1);
                               }
                               console.log(e.target.value);
-                              return e.target.value + "-";
+                              return e.target.value + '-';
                             } else return CPF;
                           }
-                          console.log("not if");
+                          console.log('not if');
                           if (
                             !isNaN(
-                              e.target.value.replace(".", "").replace("-", "")
+                              e.target.value.replace('.', '').replace('-', '')
                             )
                           ) {
                             return e.target.value;
                           } else {
-                            console.log("é letra");
+                            console.log('é letra');
                             return CPF;
                           }
                         });
@@ -190,12 +190,20 @@ export default function pending({ pedidos }) {
             pedidos.ID == 500 ? (
               <div className="mt-4">
                 <div>{pedidos.DATA}</div>
-                <div className="text-sm">Verifique se está autenticado e/ou se confirmou seu pedido em seu carrinho</div>
+                <div className="text-sm">
+                  Verifique se está autenticado e/ou se confirmou seu pedido em
+                  seu carrinho
+                </div>
               </div>
             ) : (
               <></>
             )
-          ) : Object.keys(pedidos).length == 0 ? <><div className="text-sm">Verifique se está autenticado e/ou se confirmou seu pedido em seu carrinho</div></> : (
+          ) : Object.keys(pedidos).length == 0 ? (
+            <div className="text-sm">
+              Verifique se está autenticado e/ou se confirmou seu pedido em seu
+              carrinho
+            </div>
+          ) : (
             pedidos.map((pedido) => (
               <div
                 key={pedido.ID}
@@ -203,14 +211,14 @@ export default function pending({ pedidos }) {
               >
                 <div className="grid grid-cols-8 gap-2 border-b border-gray-300 items-center pb-2">
                   <div className="grid grid-rows-2 col-span-4">
-                    <h1 className="font-bold">Registro do pedido </h1>{" "}
+                    <h1 className="font-bold">Registro do pedido </h1>{' '}
                     <p>
-                      {" "}
+                      {' '}
                       {pedido.ID.slice(pedido.ID.length - 7, pedido.ID.length)}
                     </p>
                   </div>
                   <div className="grid grid-rows-2 col-span-3">
-                    <h1 className="font-bold">Valor total</h1>{" "}
+                    <h1 className="font-bold">Valor total</h1>{' '}
                     <p> R${pedido.DATA.subtotal}</p>
                   </div>
                   <EllipsisVerticalIcon className="h-5 col-span-1 justify-end cursor-pointer" />
@@ -227,7 +235,10 @@ export default function pending({ pedidos }) {
                           <div className="col-span-7 grid grid-rows-3">
                             <h1>{produto.nome}</h1>
                             <h2>Quantidade: {produto.qtd}</h2>
-                            <h2>R${produto.preco}</h2>
+                            <h2>
+                              R$
+                              {produto.preco}
+                            </h2>
                           </div>
                         </div>
                       </li>
@@ -235,7 +246,7 @@ export default function pending({ pedidos }) {
                   </ul>
                   <div className="grid grid-cols-6 grid-rows-2 items-center">
                     <div className="pt-2 col-span-6">
-                      Pedido efetuado em{" "}
+                      Pedido efetuado em{' '}
                       {new Date(
                         new Timestamp(
                           pedido.DATA.criacao.seconds,
@@ -244,7 +255,7 @@ export default function pending({ pedidos }) {
                       ).toLocaleDateString()}
                     </div>
                     <div className="col-span-4 align-text-bottom">
-                      <ExclamationCircleIcon className="h-4 text-yellow-500 inline" />{" "}
+                      <ExclamationCircleIcon className="h-4 text-yellow-500 inline" />{' '}
                       {pedido.DATA.status}
                     </div>
                     <button
@@ -267,13 +278,15 @@ export default function pending({ pedidos }) {
 export async function getServerSideProps() {
   try {
     const retorno = await fetch(
-      "http://localhost:3000/api/firebase/firestore/getPedidos"
+      'http://localhost:3000/api/firebase/firestore/getPedidos'
     );
     const pedidos = await retorno.json();
     return {
       props: { pedidos },
     };
   } catch {
-    return { props: { pedidos: { ID: 500, DATA: "Você não possui pedidos" } } };
+    return {
+      props: { pedidos: { ID: 500, DATA: 'Você não possui pedidos' } },
+    };
   }
 }

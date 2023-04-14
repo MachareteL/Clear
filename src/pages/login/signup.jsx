@@ -9,7 +9,11 @@ import React, { Component } from 'react';
 import SignupForm from '../formik';
 import SecondStep from '@/components/SecondStep';
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = [
+  'Select campaign settings',
+  'Create an ad group',
+  'Create an ad',
+];
 
 export default function HorizontalNonLinearStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -30,22 +34,22 @@ export default function HorizontalNonLinearStepper() {
   const allStepsCompleted = () => {
     return completedSteps() === totalSteps();
   };
-  function _handleActiveForm(step){
+  function _handleActiveForm(step) {
     switch (step) {
       case 0:
-        return <SignupForm />
+        return <SignupForm />;
       case 1:
-        return <SecondStep />        
+        return <SecondStep />;
       default:
-        return <div>Deu erro</div>
+        return <div>Deu erro</div>;
     }
   }
   const handleNext = () => {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-        // find the first step that has been completed
-        steps.findIndex((step, i) => !(i in completed))
+          // find the first step that has been completed
+          steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -63,7 +67,9 @@ export default function HorizontalNonLinearStepper() {
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
-    allStepsCompleted() ? console.log("Todos passos concluidos") : console.log("Continue");
+    allStepsCompleted()
+      ? console.log('Todos passos concluidos')
+      : console.log('Continue');
   };
 
   const handleReset = () => {
@@ -72,7 +78,7 @@ export default function HorizontalNonLinearStepper() {
   };
 
   return (
-    <Box className='container m-auto mt-10'>
+    <Box className="container m-auto mt-10">
       <Stepper nonLinear activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
