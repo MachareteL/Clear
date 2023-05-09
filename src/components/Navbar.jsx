@@ -71,7 +71,6 @@ export default function NavBar() {
                           item.current ? 'text-indigo-700 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:transition ease-in-out after:duration-300 after:bg-indigo-700' : 'text-indigo-700 relative after:absolute after:w-full after:h-[3px] after:left-0 after:bottom-0 after:origin-left after:scale-0 after:transition ease-in-out after:duration-300 hover:after:scale-100 after:bg-indigo-700',
                           ` ${quick.className} px-3 py-2 rounded-md text-md font-medium tracking-normal`
                         )}
-                        aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
                       </Link>

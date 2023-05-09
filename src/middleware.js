@@ -5,11 +5,12 @@ import { getSession } from 'next-auth/react';
 export async function middleware(request) {
   const batida = await fetch('http://localhost:3000/api/firebase/getUser');
   const { user } = await batida.json();
-  
+
   console.log('MIDDLEWARE');
   if (!user) {
     console.log('redicreting');
-    return NextResponse.redirect('http://localhost:3000/login')
+    return NextResponse.redirect('http://localhost:3000/login');
+    console.log('teste');
   }
   // console.log(user);
 }
